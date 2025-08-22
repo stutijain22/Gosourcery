@@ -2,6 +2,7 @@ import styled from 'styled-components/native';
 // import {P_Medium} from "../constants/fontConstants";
 import { theme1 } from './themes';
 import { deviceHeight, deviceWidth } from './mixin';
+import { resizeMode } from '../utils/enums';
 
 export const MainContainer = styled.View`
     flex: 1;
@@ -29,8 +30,9 @@ export const MainContainer3 = styled.View`
     background-color: ${theme1.LIGHT_GREY_COLOR}; `;
 
 export const splashScreenStyle = {
-        width: 200,
-        height: 200,
+        width: deviceWidth -10,
+        height: deviceHeight/2,
+        resizeMode:'contain'
 };
 
 

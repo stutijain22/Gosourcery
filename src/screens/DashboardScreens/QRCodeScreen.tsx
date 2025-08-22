@@ -26,11 +26,9 @@ const QRCodeScreen = () => {
 
     const handleScan =async (event: any) => {
     const scannedData = event?.nativeEvent?.codeStringValue;
-    console.log("scannedDatascannedDatascannedData",scannedData);
     
     if (scannedData) {
       const parts = scannedData.split('^');
-console.log("partspartspartspartspartsparts",parts);
 
       if(parts && parts.length >0){
         // await setUserEmail(email);

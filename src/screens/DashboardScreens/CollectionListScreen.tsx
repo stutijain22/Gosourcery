@@ -6,7 +6,7 @@ import { callGraphQL } from '../../aws/apollo/apolloAPIConnect';
 import { GET_LIST_MY_COLLECTIONS, GET_LIST_MY_WORKSPACES } from '../../aws/apollo/queryMutation/apolloQuery';
 import HeaderComponent from '../../common/HeaderComponent';
 import { getEssentials, goBack, isNetAvailable } from '../../utils/utility';
-import { FlatList, Keyboard, TouchableOpacity, View } from 'react-native';
+import { FlatList, Keyboard, Platform, TouchableOpacity, View } from 'react-native';
 import Spacer from '../../styling/Spacer';
 import styles from './styles';
 import TextComponent from '../../common/TextComponent';
@@ -19,6 +19,8 @@ import ButtonComponent from '../../common/ButtonComponent';
 import { deviceWidth } from '../../styling/mixin';
 import moment from 'moment';
 import SearchInput from '../../common/SearchInput';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const CollectionListScreen = (props:any) => {
     const { navigation, theme } = getEssentials();
@@ -31,6 +33,7 @@ const CollectionListScreen = (props:any) => {
     const { workspaceId } = props?.route?.params;
     const colorPalette = [theme?.theme?.RED_COLOR,theme?.theme.BLUE_COLOR,
       theme?.theme.BLACK_COLOR, theme?.theme.YELLOW_COLOR, theme?.theme.GREEN_COLOR];
+      const insets = useSafeAreaInsets();
 
     useEffect(() => {
         (async () => {
@@ -51,11 +54,6 @@ const CollectionListScreen = (props:any) => {
         try {
             const loginToken:any = await getData(key_setLoginToken);
            // First call: collectionGroup "workspace"
-           console.log("sfbdsnfdsfsasqwqewqwq",{
-            limit: 100,
-            workspaceId: workspaceId?.id,
-            collectionGroup: "workspace",
-          });
            
     const res1 = await callGraphQL(GET_LIST_MY_COLLECTIONS, {
       limit: 100,
@@ -86,7 +84,6 @@ const CollectionListScreen = (props:any) => {
         }
       };
       
-
     const handlePress = (item:any) => {
         setSelectedCollection(item);
     }
@@ -223,7 +220,20 @@ const CollectionListScreen = (props:any) => {
         placeholderTextColor={theme?.theme?.DARK_GREY_COLOR}
         handleSearch={debouncedSearch} 
         />
+
   <Spacer height={heightPercentageToDP(3)} />
+
+         <KeyboardAwareScrollView
+        showsVerticalScrollIndicator={false}
+        enableOnAndroid={true}
+        extraScrollHeight={Platform.OS === "android" ? 100 : 20} // push content up
+        keyboardOpeningTime={0}
+        enableAutomaticScroll={true} // ✅ allow automatic scroll
+        contentContainerStyle={{
+          flexGrow: 1,
+          paddingBottom: insets.bottom + 80, // leave space for footer
+        }}
+      >
 
           <FlatList
             data={collectionList}
@@ -231,7 +241,21 @@ const CollectionListScreen = (props:any) => {
           renderItem={renderItem}
           keyExtractor={(item, index) => index.toString()}
           />
-<Spacer height={heightPercentageToDP(2)} />
+{/* <Spacer height={heightPercentageToDP(2)} /> */}
+</KeyboardAwareScrollView>
+
+<View
+        style={{
+          position: 'absolute',
+          bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: theme?.theme?.WHITE_COLOR, // full-width footer background
+    paddingBottom: insets.bottom + 10, // safe area for iOS/Android
+    paddingTop: 10,
+    alignItems: 'center',
+        }}
+      >
 <ButtonComponent
         title={'NEXT'}
         onHandleClick={() => nextClick()}
@@ -241,8 +265,8 @@ const CollectionListScreen = (props:any) => {
         fontColor={theme?.theme.WHITE_COLOR}
         textStyle={{ fontSize: 16, fontFamily: DMSansSemiBold, letterSpacing: 1.1 }}
         />
-
-<Spacer height={heightPercentageToDP(3)} />
+        </View>
+{/* <Spacer height={heightPercentageToDP(7)} /> */}
 
 
         </MainContainer2>

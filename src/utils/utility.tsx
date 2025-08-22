@@ -36,7 +36,20 @@ export const isNetAvailable = () => new Promise((resolve, reject) => {
 });
 
   
-
+export const formatPhoneNumber = (text: string) => {
+    // Remove all non-digit characters
+    const cleaned = text.replace(/\D/g, '');
+    
+    // Apply formatting
+    let formatted = cleaned;
+    if (cleaned.length > 3 && cleaned.length <= 6) {
+      formatted = `${cleaned.slice(0, 3)}-${cleaned.slice(3)}`;
+    } else if (cleaned.length > 6) {
+      formatted = `${cleaned.slice(0, 3)}-${cleaned.slice(3, 6)}-${cleaned.slice(6, 10)}`;
+    }
+  
+    return formatted;
+  };
 
 export const emailValidation = (email: string) => {
     if (email !== null) {

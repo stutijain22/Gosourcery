@@ -151,9 +151,6 @@ const MyAccountScreen = (props: any): JSX.Element => {
     //   return isValid;
   }
 
-  console.log("sdhsfhdsfdsfsdfsdfdf",YOUR_GOOGLE_API_KEY);
-  
-
   const handlePlaceSelect = (place: any) => {
     Alert.alert("Location Selected", JSON.stringify(place, null, 2));
   };
@@ -322,7 +319,6 @@ const MyAccountScreen = (props: any): JSX.Element => {
 
       <LocationSearchBox 
       onPlaceSelected={(location:any) => {
-  // console.log('Selected location:', location);
 }} 
 wrapperHeight={55} wrapperWidth={deviceWidth - 44}
 placeholder={'Search Location'}

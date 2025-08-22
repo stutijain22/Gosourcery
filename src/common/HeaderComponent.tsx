@@ -7,6 +7,7 @@ import { hasDynamicIsland, isTablet } from "react-native-device-info";
 import ImageComponent from "./ImageComponent";
 import TextComponent from "./TextComponent";
 import OfflineNotice from "./OfflineNotice";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 
 interface HeaderProps {
@@ -60,7 +61,8 @@ const bottom_border = {
 };
 const HeaderComponent: FC<HeaderProps> = (props) => {
   const theme = setThemeJSON();
-
+  const insets = useSafeAreaInsets(); // gives top, bottom, left, right padding
+  const baseHeight = 50;
   const {
     height,
     leftIcon,
@@ -103,7 +105,8 @@ const HeaderComponent: FC<HeaderProps> = (props) => {
         {
           backgroundColor: "transparent",
           width: deviceWidth,
-          height: hasDynamicIsland() ? height + 42 : height +8,
+          height: baseHeight + insets.top,
+          // height: hasDynamicIsland() ? height + 42 : height +35,
           justifyContent: "flex-end",
           alignItems: "flex-end",
           alignSelf:'center',

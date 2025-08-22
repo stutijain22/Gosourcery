@@ -13,6 +13,16 @@ export const SEND_BADGE_SCANNER_EMAIL = `
     clientEmail
     collectionId
     collectionName
+    state
+    phoneNumber
+    lastName
+    firstName
+    country
+    companyName
+    city
+    zip
+    address
+    businessType
     emailStatus
     eventId
     notes
@@ -45,5 +55,11 @@ export const UPDATE_USER_PROFILE = `
       location
       projectTeamRole
     }
+  }
+`;
+
+export const DOWNLOAD_BADGE_SCANNER_HISTORY = `
+   mutation downloadBadgeScannerHistory($eventId: String!, $userId: String!) {
+    downloadBadgeScannerHistory(eventId: $eventId, userId: $userId)
   }
 `;

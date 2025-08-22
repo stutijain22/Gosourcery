@@ -1,6 +1,7 @@
 const images = "../assets/images/";
 
 export const SPLASH_IMAGE = require(images + "logo.png");
+export const SPLASH_LOGO = require(images + "splashLogo.png");
 export const HIDDEN_EYE_IMAGE = require(images + "hiddenEyeIcon.png");
 export const EYE_IMAGE = require(images + "eyeIcon.png");
 export const BACK_ARROW_ICON = require(images + "backIcon.png");

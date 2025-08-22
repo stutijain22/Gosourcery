@@ -1,29 +1,30 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import HeaderComponent from "../../../common/HeaderComponent";     
-import {MainContainer1, MainContainer2} from "../../../styling/shared";
+import {MainContainer2} from "../../../styling/shared";
 import { getEssentials, isNetAvailable, navigateScreen } from "../../../utils/utility";
-import { GET_BADGE_SCANNER_HISTORY, GET_LIST_MY_WORKSPACES } from "../../../aws/apollo/queryMutation/apolloQuery";
+import { GET_BADGE_SCANNER_HISTORY } from "../../../aws/apollo/queryMutation/apolloQuery";
 import { callGraphQL } from '../../../aws/apollo/apolloAPIConnect';
 import { getData, getJSONData, storeJSONData } from '../../../utils/AsyncStorage';
-import { DMSansBold, DMSansMedium, DMSansSemiBold, key_setHistoryList, key_setHistoryPendingList, key_setLoginToken, key_setUserData, key_setUserId } from '../../../constant/Constant';
-import { Button, FlatList, Modal, Platform, RefreshControl, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
-import HistoryTable from './HistoryTable';
+import { DMSansBold, DMSansMedium, key_setHistoryList, key_setHistoryPendingList, key_setLoginToken, key_setUserData, key_setUserId } from '../../../constant/Constant';
+import { FlatList, RefreshControl, TouchableOpacity, View } from 'react-native';
 import Spacer from '../../../styling/Spacer';
 import styles from '../styles';
 import TextComponent from '../../../common/TextComponent';
 import CustomTabView from '../../../common/CustomTabView';
 import ImageComponent from '../../../common/ImageComponent';
-import { CROSS_ICON, MAIL_ICON, SEND_ICON } from '../../../utils/sharedImages';
+import { MAIL_ICON } from '../../../utils/sharedImages';
 import { imageTypes, resizeMode } from '../../../utils/enums';
 import { eventId } from '../../../aws-exports';
 import moment from 'moment';
 import LoaderComponent from '../../../common/LoaderComponent';
 import { S_HistoryDetailScreen } from '../../../constant/screenNameConstants';
-import { SEND_BADGE_SCANNER_EMAIL } from '../../../aws/apollo/queryMutation/apolloMutation';
+import { DOWNLOAD_BADGE_SCANNER_HISTORY, SEND_BADGE_SCANNER_EMAIL } from '../../../aws/apollo/queryMutation/apolloMutation';
 import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 import { heightPercentageToDP } from '../../../utils/responsiveUI';
 import ButtonComponent from '../../../common/ButtonComponent';
 import { deviceWidth } from '../../../styling/mixin';
+import CommonModal from '../../../common/CommonModal';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const HistoryScreen = () => {
   const isFocused = useIsFocused()
@@ -34,6 +35,7 @@ const HistoryScreen = () => {
     const [selectedOption, setSelectedOption] = useState("Sent");
     const [refreshing, setRefreshing] = useState(false);
     const [modalVisible, setModalVisible] = useState({ title: "", key: "", value: false });
+    const insets = useSafeAreaInsets();
  
     useEffect(() => {
       (async () => {
@@ -59,7 +61,6 @@ const HistoryScreen = () => {
   useFocusEffect(
     useCallback(() => {
       setSelectedOption('Sent'); // or your default tab
-      // Optional: refetch data
     }, [])
   );
 
@@ -69,8 +70,6 @@ const HistoryScreen = () => {
         setIsLoading(true);
         await fetchHistoryData('sent');
       } else if (selectedOption === 'Pending') {
-        // const isOnline = await isNetAvailable();
-        // await  sendPendingItemsToServer();
         setIsLoading(true);
         await fetchHistoryData('pending');
 
@@ -107,37 +106,34 @@ const HistoryScreen = () => {
  
   
     for (const item of merged) {
-      console.log("sfhdsfhdshfhsdfdshfhsdhfdhs",item);
       try {
         const data = await callGraphQL(
           SEND_BADGE_SCANNER_EMAIL,
           {
-            firstName: item.firstName,
-            lastName: item.lastName,
-            phoneNumber: item.phoneNumber,
-            companyName: item.companyName,
-            businessType: item.businessType,
-            zip: item.zipCode,
-            state: item.stateValue,
-            country: item.countryValue,
-            city: item.cityValue,
-            address: item.addressValue,
-            clientEmail: item.clientEmail,
-            collectionId: item.collectionId,
-            collectionName: item.collectionName,
-            eventId: eventId,
-            notes: item.notes,
-            rawInfo: item.rawInfo || "",
-            userId: userId,
-            workspaceId: item.workspaceId,
-            workspaceName: item.workspaceName,
-            resend: true
+            "firstName": item.firstName,
+            "lastName": item.lastName,
+            "phoneNumber": item.phoneNumber,
+            "companyName": item.companyName,
+            "businessType": item.businessType,
+            "zip": item.zip,
+            "state": item.state,
+            "country": item.country,
+            "city": item.city,
+            "address": item.address,
+            "clientEmail": item.clientEmail,
+            "collectionId": item.collectionId,
+            "collectionName": item.collectionName,
+            "eventId": eventId,
+            "notes": item.notes,
+            "rawInfo": item.rawInfo || "",
+            "userId": userId,
+            "workspaceId": item.workspaceId,
+            "workspaceName": item.workspaceName,
+            "resend": true
           },
           loginToken,
           navigation
         );
-  
-  
         // Create a key for this item to track
         const key = item.transactionId || `${item.clientEmail}_${item.collectionId}`;
         successfullySentKeys.add(key);
@@ -154,30 +150,17 @@ const HistoryScreen = () => {
       
         await storeJSONData(key_setUserData, updatedUserData);
         await storeJSONData(key_setHistoryPendingList, updatedPending);
-        // setHistoryPendingData(updatedPending); // Update UI state
   
       } catch (err) {
         console.error("❌ Error sending pending item:", err);
       }
     }
-    // await storeJSONData(key_setUserData, []);
-    // await storeJSONData(key_setHistoryPendingList, []);
-    // setHistoryPendingData([]);
-    // console.log("🧹 Cleared all local pending data");
-    // Filter out successfully sent items from local user data
   };
 
   const fetchHistoryData = async (emailStatus:any) => {
         try {
             const loginToken:any = await getData(key_setLoginToken);
-            const userId:any = await getData(key_setUserId);
-            console.log("sdsfdsfdsfdsfdsfdsfdsf",{
-              limit: 200,
-              eventId: eventId,
-              userId:userId,
-              emailStatus: emailStatus
-             });
-            
+            const userId:any = await getData(key_setUserId);  
             const data = await callGraphQL(GET_BADGE_SCANNER_HISTORY, {
                limit: 200,
                eventId: eventId,
@@ -312,8 +295,37 @@ const HistoryScreen = () => {
     }
   };
 
-  const downloadClick = () =>{
+  const downloadClick =async () =>{
+    try {
+      setIsLoading(true);
+      const loginToken:any = await getData(key_setLoginToken);
+      const userId:any = await getData(key_setUserId);  
+      const data = await callGraphQL(DOWNLOAD_BADGE_SCANNER_HISTORY, {
+         eventId: eventId,
+         userId:userId,
+        }, loginToken,navigation);
 
+        const downloadData = data?.downloadBadgeScannerHistory;
+        console.log("downloadDatadownloadDatadownloadData", downloadData?.status);
+        setModalVisible({ title: "Success", key: "Email sent successfully", value: true });
+        setIsLoading(false);
+        // If emailStatus is 'pending', use local only
+  }catch (err:any) {
+    setIsLoading(false);
+    console.error("❌ Failed to fetch Download Data:", err);
+    setModalVisible({ title: "Error", key: err?.message, value: true });
+
+  } finally {
+    setIsLoading(false);
+  }
+
+  }
+
+  const buttonClick = () => {
+    if(modalVisible.title == 'Success'){
+      setModalVisible({ title: "", key: "", value: false })
+        // navigateScreen(navigation,S_BottomTabsDashboard);
+      }
   }
 
     return (
@@ -352,6 +364,9 @@ const HistoryScreen = () => {
     showsVerticalScrollIndicator={false}
       renderItem={renderItem}
       keyExtractor={(item, index) => index.toString()}
+      contentContainerStyle={{
+        paddingBottom: insets.bottom + 80, // space for footer
+      }}
     />:
     historyPendingData && historyPendingData.length > 0 ?
     <FlatList
@@ -361,8 +376,11 @@ const HistoryScreen = () => {
     refreshControl={
       <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
     }
-    ListFooterComponent={() => <Spacer height={30}/>}
+    // ListFooterComponent={() => <Spacer height={30}/>}
     keyExtractor={(item,index) => index.toString()}
+    contentContainerStyle={{
+      paddingBottom: insets.bottom + 80, // space for footer
+    }}
   />:
 <View style={[styles.columnStyle,{flex:1}]}>
 <TextComponent
@@ -376,6 +394,18 @@ const HistoryScreen = () => {
 }
 
 <Spacer height={heightPercentageToDP(1.5)} />
+<View
+        style={{
+          position: 'absolute',
+          bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: theme?.theme?.WHITE_COLOR, // full-width footer background
+    paddingBottom: insets.bottom + 10, // safe area for iOS/Android
+    paddingTop: 10,
+    alignItems: 'center',
+        }}
+      >
             <ButtonComponent
                     title={'DOWNLOAD LEADS'}
                     onHandleClick={() => downloadClick()}
@@ -387,6 +417,7 @@ const HistoryScreen = () => {
                     fontColor={theme?.theme.WHITE_COLOR}
                     textStyle={{letterSpacing: 1.1}}
                     />
+                    </View>
             {/* <View style={styles.rowStyle}>
                 <Button title="Insert Record" onPress={handleInsert} />
                 <Spacer width={40} />
@@ -396,7 +427,25 @@ const HistoryScreen = () => {
 
             <HistoryTable data={initialData} /> */}
           {/* </View> */}
-          <Spacer height={heightPercentageToDP(1.5)} />
+          {/* <Spacer height={heightPercentageToDP(1.5)} /> */}
+
+          <CommonModal
+            visible={modalVisible.value}
+            headingType={modalVisible.title}
+            text={modalVisible.key.toString()}
+            textFontSize={modalVisible.title == "" ? 20 : 12}
+            textColor={theme?.theme?.BLACK_COLOR}
+            onDismiss={() => setModalVisible({ title: "", key: "", value: false })}
+            buttonHeight={50}
+            buttonWidth={120}
+            crossIcon={true}
+            headingText={modalVisible.title}
+            headingTextFontSize={20}
+            buttonBackgroundColor={theme?.theme.SECOND_TEXT_COLOR}
+            singleButton={true}
+            positiveButtonClick={() => buttonClick()}
+            positiveButtonText={'OK'}
+        />
         </MainContainer2>
     )
 }

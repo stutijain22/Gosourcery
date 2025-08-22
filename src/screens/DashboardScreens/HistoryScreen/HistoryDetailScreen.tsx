@@ -17,6 +17,7 @@ import { getData, getJSONData, storeJSONData } from '../../../utils/AsyncStorage
 import { SEND_BADGE_SCANNER_EMAIL } from '../../../aws/apollo/queryMutation/apolloMutation';
 import { callGraphQL } from '../../../aws/apollo/apolloAPIConnect';
 import { S_BottomTabsDashboard } from '../../../constant/screenNameConstants';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const InfoRow = ({ label, value }: { label: string, value: string }) => {
     const { theme } = getEssentials();
@@ -49,9 +50,7 @@ const HistoryDetailScreen = (props:any) => {
     const [isLoading, setIsLoading] = useState(false);
     const [modalVisibleOne, setModalVisibleOne] = useState<any>({key: "", value: false});
     const {itemDetail, refresh} = props?.route?.params ?? '';
-
-    console.log("itemDetailitemDetail",itemDetail);
-
+    const insets = useSafeAreaInsets();
 
 const sendClick =async () =>{
   await setIsLoading(true);
@@ -60,20 +59,18 @@ const sendClick =async () =>{
   const userId:any = await getData(key_setUserId);
   let selectCollection:any = await getJSONData(key_selectCollection);  
   let selectWorkSpace:any = await getJSONData(key_selectWorkSpace); 
-  let scanQrData:any = await getData(key_setUserScanData); 
-  
+  let scanQrData:any = await getData(key_setUserScanData);  
     const data = await callGraphQL(SEND_BADGE_SCANNER_EMAIL, {
       "firstName": itemDetail?.firstName,
         "lastName": itemDetail?.lastName,
         "phoneNumber": itemDetail?.phoneNumber,
         "companyName": itemDetail?.companyName,
         "businessType": itemDetail?.businessType,
-        "zip": itemDetail?.zipCode,
-        "state": itemDetail?.stateValue,
-        "country": itemDetail?.countryValue,
-        "city": itemDetail?.cityValue,
-        "address": itemDetail?.addressValue,
-      "clientName" : itemDetail?.clientName,
+        "zip": itemDetail?.zip,
+        "state": itemDetail?.state,
+        "country": itemDetail?.country,
+        "city": itemDetail?.city,
+        "address": itemDetail?.address,
     "clientEmail" : itemDetail?.clientEmail,
     "collectionId" : selectCollection && selectCollection?.id,
     "collectionName" :selectCollection && selectCollection?.name,
@@ -135,15 +132,16 @@ const sendClick =async () =>{
 
       <KeyboardAwareScrollView
        enableOnAndroid={true}
-       extraScrollHeight={Platform.OS === "android" ? 100 : 0}
-       contentContainerStyle={{
-           flexGrow: 1,
-        //    alignItems: "center",
-        //    justifyContent: "center",
-       }} // make the scrollView full screen
-    //    innerRef={setRef}
-       showsVerticalScrollIndicator={false}
-       enableAutomaticScroll={true}>
+      //  extraHeight={100}
+       style={{ flex: 1 }}
+        extraScrollHeight={Platform.OS === "android" ? 100 : 20} // push content up
+        keyboardOpeningTime={0}
+        enableAutomaticScroll={true} // ✅ allow automatic scroll
+        contentContainerStyle={{
+          flexGrow: 1,
+          paddingBottom: insets.bottom + 80, // leave space for footer
+        }}
+       showsVerticalScrollIndicator={false}>
 
         <View style={styles.modalViewStyle}>
           {/* <View style={styles.rowStyleFour}> */}
@@ -192,6 +190,8 @@ const sendClick =async () =>{
               <InfoRow label="Country" value={itemDetail?.country || '-'} />
               <InfoRow label="City" value={itemDetail?.city || '-'} />
               <InfoRow label="Timestamp" value={itemDetail?.timestamp ? moment(itemDetail.timestamp).format('DD MMM YYYY, hh:mm A') : '-'} />
+            
+            
               {/* {itemDetail?.city && <InfoRow label="City" value={itemDetail?.city} />} */}
           <Spacer height={30} />
 

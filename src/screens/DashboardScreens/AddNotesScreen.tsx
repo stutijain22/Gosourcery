@@ -1,8 +1,8 @@
 import { JSX, useEffect, useRef, useState } from "react";
 import HeaderComponent from "../../common/HeaderComponent";
 import { MainContainer1, MainContainer2, shadowStyle } from "../../styling/shared";
-import { emailValidation, getEssentials, getKeyboardHeight, goBack, isNetAvailable, navigateScreen } from "../../utils/utility";
-import { Keyboard, View } from "react-native";
+import { emailValidation, formatPhoneNumber, getEssentials, getKeyboardHeight, goBack, isNetAvailable, navigateScreen } from "../../utils/utility";
+import { Keyboard, Platform, View } from "react-native";
 import { deviceHeight, deviceWidth } from "../../styling/mixin";
 import { DMSansBold, DMSansMedium, DMSansSemiBold, key_selectCollection, key_selectWorkSpace, key_setLoginToken, key_setUserData, key_setUserId, key_setUserScanData } from "../../constant/Constant";
 import Spacer from "../../styling/Spacer";
@@ -20,6 +20,7 @@ import { callGraphQL } from "../../aws/apollo/apolloAPIConnect";
 import { SEND_BADGE_SCANNER_EMAIL } from "../../aws/apollo/queryMutation/apolloMutation";
 import LoaderComponent from "../../common/LoaderComponent";
 import CommonModal from "../../common/CommonModal";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const AddNotesScreen = (props: any): JSX.Element => {
     const { navigation, theme } = getEssentials();
@@ -49,7 +50,7 @@ const AddNotesScreen = (props: any): JSX.Element => {
     const ref_to_last_name = useRef(null);
     const ref_to_email = useRef(null);
     const ref_to_notes = useRef(null);
-console.log("props?.route?.paramsprops?.route?.paramsprops?.route?.params",props?.route?.params);
+    const insets = useSafeAreaInsets();
 
     useEffect(() => {
       (async () => {
@@ -83,19 +84,19 @@ console.log("props?.route?.paramsprops?.route?.paramsprops?.route?.params",props
       }
   }, [email, firstName,lastName]);
 
-    useEffect(() => {
-      const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
-        setKeyboardVisible(true);
-      });
-      const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
-        setKeyboardVisible(false);
-      });
+    // useEffect(() => {
+    //   const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
+    //     setKeyboardVisible(true);
+    //   });
+    //   const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
+    //     setKeyboardVisible(false);
+    //   });
 
-      return () => {
-        keyboardDidShowListener.remove();
-        keyboardDidHideListener.remove();
-      };
-    }, []);
+    //   return () => {
+    //     keyboardDidShowListener.remove();
+    //     keyboardDidHideListener.remove();
+    //   };
+    // }, []);
 
     const onFocusChanged = (isFocus: boolean | false): void => {
       setFocus(isFocus)
@@ -263,20 +264,16 @@ console.log("props?.route?.paramsprops?.route?.paramsprops?.route?.params",props
                             enableOnAndroid={true}
                             scrollEnabled={true}
                             innerRef={setRef}
-                            enableAutomaticScroll={false} // ⛔️ disables scroll adjustment
-                            extraScrollHeight={0}         // ⛔️ disables scroll shift
-                            contentContainerStyle={{ flexGrow: 1 }}
-                            style={{flex:1}}
-                            // extraScrollHeight={Platform.OS === "android" ? 100 : 20}
-                            // contentContainerStyle={{
-                            //     flexGrow: 1,
-                            //     alignItems: "center",
-                            //     justifyContent: "center",
-                            // }} // make the scrollView full screen
-                            // innerRef={setRef}
+                            enableAutomaticScroll={true} // ✅ allow automatic scroll
+                            extraScrollHeight={Platform.OS === "android" ? 150 : 20} // ✅ shift extra space
                             showsVerticalScrollIndicator={false}
-                            keyboardOpeningTime={Number.MAX_SAFE_INTEGER}
-                            // enableAutomaticScroll={true}
+                            keyboardOpeningTime={0} // ✅ let it trigger immediately
+                            // extraScrollHeight={0}         // ⛔️ disables scroll shift
+                            contentContainerStyle={{
+                              flexGrow: 1,
+                              paddingBottom: insets.bottom + 30, // leave space for footer
+                            }}
+                            // style={{flex:1}}
                         >
 <View style={{flex:1,paddingHorizontal:20}}>
           {/* <TextComponent 
@@ -383,7 +380,8 @@ console.log("props?.route?.paramsprops?.route?.paramsprops?.route?.params",props
                         wrapperBackgroundColor={theme?.theme?.LIGHT_GREY_COLOR}
                         hasWrapperTitle={true}
                         onChangeText={(e: string) => {
-                          setPhoneNumber(e)
+                          // setPhoneNumber(e)
+                          setPhoneNumber(formatPhoneNumber(e))
                         }}
                         wrapperTextTitle={"Phone Number (Optional)"}
                         placeholderTextColor={theme?.theme.DARK_GREY_COLOR}
@@ -391,7 +389,7 @@ console.log("props?.route?.paramsprops?.route?.paramsprops?.route?.params",props
                         value={phoneNumber}
                         color={theme?.theme.BLACK_COLOR}
                         fontSize={16}
-                        maxLength={10}
+                        maxLength={12}
                         fontFamily={DMSansMedium}
                         props={{
                             autoCapitalize: "none",
@@ -638,7 +636,17 @@ console.log("props?.route?.paramsprops?.route?.paramsprops?.route?.params",props
 </View>
 </KeyboardAwareScrollView>
 
-{!keyboardVisible &&<ButtonComponent
+{/* {!keyboardVisible && */}
+<View style={{position: 'absolute',
+          bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: theme?.theme?.WHITE_COLOR, // full-width footer background
+    paddingBottom: insets.bottom + 10, // safe area for iOS/Android
+    paddingTop: 10,
+    alignItems: 'center',
+}}>
+<ButtonComponent
         title={'SEND EMAIL'}
         onHandleClick={() => sendClick()}
         height={50}
@@ -652,8 +660,9 @@ console.log("props?.route?.paramsprops?.route?.paramsprops?.route?.params",props
         fontColor={theme?.theme.WHITE_COLOR}
         textStyle={{ fontSize: 16, fontFamily: DMSansSemiBold, letterSpacing: 1.1 }}
         />
-}
-        <Spacer height={heightPercentageToDP(3)} />
+        </View>
+{/* } */}
+        {/* <Spacer height={heightPercentageToDP(3)} /> */}
 
         <CommonModal
             visible={modalVisible.value}
