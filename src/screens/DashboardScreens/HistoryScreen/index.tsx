@@ -6,7 +6,7 @@ import { GET_BADGE_SCANNER_HISTORY } from "../../../aws/apollo/queryMutation/apo
 import { callGraphQL } from '../../../aws/apollo/apolloAPIConnect';
 import { getData, getJSONData, storeJSONData } from '../../../utils/AsyncStorage';
 import { DMSansBold, DMSansMedium, key_setHistoryList, key_setHistoryPendingList, key_setLoginToken, key_setUserData, key_setUserId } from '../../../constant/Constant';
-import { FlatList, RefreshControl, TouchableOpacity, View } from 'react-native';
+import { FlatList, Platform, RefreshControl, TouchableOpacity, View } from 'react-native';
 import Spacer from '../../../styling/Spacer';
 import styles from '../styles';
 import TextComponent from '../../../common/TextComponent';
@@ -306,8 +306,7 @@ const HistoryScreen = () => {
         }, loginToken,navigation);
 
         const downloadData = data?.downloadBadgeScannerHistory;
-        console.log("downloadDatadownloadDatadownloadData", downloadData?.status);
-        setModalVisible({ title: "Success", key: "Email sent successfully", value: true });
+        setModalVisible({ title: "Email Sent", key: "Leads information has been sent to your inbox.", value: true });
         setIsLoading(false);
         // If emailStatus is 'pending', use local only
   }catch (err:any) {
@@ -325,6 +324,8 @@ const HistoryScreen = () => {
     if(modalVisible.title == 'Success'){
       setModalVisible({ title: "", key: "", value: false })
         // navigateScreen(navigation,S_BottomTabsDashboard);
+      }else{
+      setModalVisible({ title: "", key: "", value: false })
       }
   }
 
@@ -359,7 +360,9 @@ const HistoryScreen = () => {
             />
             <Spacer height={20} />
 
-         {selectedOption == 'Sent'?   <FlatList
+         {selectedOption == 'Sent'? 
+           historyData && historyData.length > 0 ? 
+         <FlatList
       data={historyData}
     showsVerticalScrollIndicator={false}
       renderItem={renderItem}
@@ -367,7 +370,18 @@ const HistoryScreen = () => {
       contentContainerStyle={{
         paddingBottom: insets.bottom + 80, // space for footer
       }}
-    />:
+    />
+    :
+    <View style={[styles.columnStyle,{flex:1}]}>
+<TextComponent
+                                        value={"No data has been sent yet"}
+                                        fontSize={19}
+                                        fontFamily={DMSansBold}
+                                        color={theme?.theme?.TEXT_COLOR}
+                                    // styles={styles.textViewStyle}
+                                    />
+</View>
+    :
     historyPendingData && historyPendingData.length > 0 ?
     <FlatList
     data={historyPendingData}
@@ -384,7 +398,7 @@ const HistoryScreen = () => {
   />:
 <View style={[styles.columnStyle,{flex:1}]}>
 <TextComponent
-                                        value={"No Data Found"}
+                                        value={"No pending messages to be sent"}
                                         fontSize={19}
                                         fontFamily={DMSansBold}
                                         color={theme?.theme?.TEXT_COLOR}
@@ -401,7 +415,7 @@ const HistoryScreen = () => {
     left: 0,
     right: 0,
     backgroundColor: theme?.theme?.WHITE_COLOR, // full-width footer background
-    paddingBottom: insets.bottom + 10, // safe area for iOS/Android
+    paddingBottom: Platform.OS == 'ios'? insets.bottom -20 : insets.bottom -10 , // safe area for iOS/Android
     paddingTop: 10,
     alignItems: 'center',
         }}
@@ -433,7 +447,7 @@ const HistoryScreen = () => {
             visible={modalVisible.value}
             headingType={modalVisible.title}
             text={modalVisible.key.toString()}
-            textFontSize={modalVisible.title == "" ? 20 : 12}
+            textFontSize={modalVisible.title == "" ? 20 : 14}
             textColor={theme?.theme?.BLACK_COLOR}
             onDismiss={() => setModalVisible({ title: "", key: "", value: false })}
             buttonHeight={50}
@@ -441,7 +455,7 @@ const HistoryScreen = () => {
             crossIcon={true}
             headingText={modalVisible.title}
             headingTextFontSize={20}
-            buttonBackgroundColor={theme?.theme.SECOND_TEXT_COLOR}
+            buttonBackgroundColor={theme?.theme.BLUE_COLOR}
             singleButton={true}
             positiveButtonClick={() => buttonClick()}
             positiveButtonText={'OK'}

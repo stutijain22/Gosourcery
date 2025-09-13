@@ -210,17 +210,34 @@ const TextInputComponent: FC<TextInputComponentProps> = (props) => {
                                     width={iconWidth} />
                         }
                     </View>}
-                {props.rightIconVisible &&
-                    <View style={{ height: '100%', width: 50, justifyContent: 'center', alignItems: 'center' }}>
-                        <TouchableOpacity onPress={() => {
-                            props.isPasswordSecure ? props.setIsPasswordSecure(false) : props.setIsPasswordSecure(true)
-                            setShowIcon(!showIcon)
-                        }}>
-                            <ImageComponent imageType={imageTypes.local} source={ props.isPasswordSecure ? props.rightIcon : props.closedRightIcon} height={20}
-                                width={20} />
-                        </TouchableOpacity>
+                    {props.rightIconVisible && (
+  <View
+    style={{
+      height: '100%',
+      width: 50,
+      justifyContent: 'center',
+      alignItems: 'center',
+    }}
+  >
+    <TouchableOpacity
+      onPress={() => {
+        props.setIsPasswordSecure(!props.isPasswordSecure); // toggle in parent
+      }}
+    >
+      <ImageComponent
+        imageType={imageTypes.local}
+        source={
+          props.isPasswordSecure
+            ? props.closedRightIcon // show closed eye when secure
+            : props.rightIcon       // show open eye when visible
+        }
+        height={20}
+        width={20}
+      />
+    </TouchableOpacity>
+  </View>
+)}
 
-                    </View>}
 
             </View>
             {

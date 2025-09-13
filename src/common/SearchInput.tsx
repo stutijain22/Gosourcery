@@ -73,6 +73,7 @@ const SearchInput: FC<TextInputComponentProps> = (props) => {
                     paddingHorizontal: 12, 
                     letterSpacing: 1,
                      paddingVertical: 10,
+                    //  color:theme?.theme?.BLACK_COLOR
                 }]}
                 onFocus={(e) => {
                 }}

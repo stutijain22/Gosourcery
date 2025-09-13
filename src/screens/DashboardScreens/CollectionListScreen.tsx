@@ -30,6 +30,7 @@ const CollectionListScreen = (props:any) => {
     const [selectedCollection, setSelectedCollection] = useState<any>({});
     const [modalVisible, setModalVisible] = useState({ title: "", key: "", value: false });
     const [collectionList, setCollectionList] = useState<any>([]);
+    const [allCollectionList, setAllCollectionList] = useState([]);
     const { workspaceId } = props?.route?.params;
     const colorPalette = [theme?.theme?.RED_COLOR,theme?.theme.BLUE_COLOR,
       theme?.theme.BLACK_COLOR, theme?.theme.YELLOW_COLOR, theme?.theme.GREEN_COLOR];
@@ -71,10 +72,15 @@ const CollectionListScreen = (props:any) => {
     const workspaceCollections = res1?.listMyCollections?.data || [];
     const publishedCollections = res2?.listMyCollections?.data || [];
 
-    const mergedCollections = [...workspaceCollections, ...publishedCollections];     
-      await setCollectionList(mergedCollections);
+    const mergedCollections:any = [...workspaceCollections, ...publishedCollections];     
+  // ✅ Sort alphabetically by `name` (case-insensitive)
+const sortedCollections:any = [...mergedCollections].sort(
+  (a: any, b: any) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' })
+);
 
-      await storeJSONData(key_setCollectionList,mergedCollections)
+await setCollectionList(sortedCollections);
+await setAllCollectionList(sortedCollections);
+await storeJSONData(key_setCollectionList, sortedCollections);
             setIsLoading(false);
         } catch (err) {
           setIsLoading(false);
@@ -107,7 +113,7 @@ const CollectionListScreen = (props:any) => {
              textAlign={'center'}
              styles={{ letterSpacing: 1.1 }}
             color={theme?.theme.WHITE_COLOR}
-            value={name?.charAt(0) + name?.charAt(1)} />
+            value={name?.charAt(0).toUpperCase() + name?.charAt(1).toUpperCase()} />
           </View>
           <Spacer width={10} />
           <View style={{paddingHorizontal:5, flex:1}}>
@@ -152,25 +158,41 @@ const CollectionListScreen = (props:any) => {
     const clearSearch = async () =>{
       setSearchText("");
       Keyboard.dismiss();
-      await fetchWorkspaces()
+      setCollectionList(allCollectionList);
+      // await fetchWorkspaces()
       await setIsLoading(false);
     }
+
     const handleSearch = async (text: string) => {
       setIsLoading(true)
-      if (text.length == 0) {
-        clearSearch()
-      }
-      else if (text.length >= 1) {
-        const filteredWorkspaces = collectionList.filter((item:any) =>
-          item.name.toLowerCase().includes(searchText.toLowerCase())
+      if (!text) {
+        await setCollectionList(allCollectionList);
+        await setIsLoading(false);
+        return;
+      }  
+        const filteredWorkspaces = allCollectionList.filter((item: any) =>
+          item?.name?.toLowerCase().includes(text.toLowerCase())
         );
         await setCollectionList(filteredWorkspaces)
         await setIsLoading(false)
-         
-      } else {
-        setSearchText(text);
-      }
   };
+
+  //   const handleSearch = async (text: string) => {
+  //     setIsLoading(true)
+  //     if (text.length == 0) {
+  //       clearSearch()
+  //     }
+  //     else if (text.length >= 1) {
+  //       const filteredWorkspaces = collectionList.filter((item:any) =>
+  //         item.name.toLowerCase().includes(searchText.toLowerCase())
+  //       );
+  //       await setCollectionList(filteredWorkspaces)
+  //       await setIsLoading(false)
+         
+  //     } else {
+  //       setSearchText(text);
+  //     }
+  // };
 
     const debounce = (callback: any, alwaysCall: any, ms: any) => {
       return (...args:any) => {
@@ -235,12 +257,25 @@ const CollectionListScreen = (props:any) => {
         }}
       >
 
-          <FlatList
-            data={collectionList}
-          showsVerticalScrollIndicator={false}
-          renderItem={renderItem}
-          keyExtractor={(item, index) => index.toString()}
-          />
+{collectionList && collectionList.length > 0 ?
+    <FlatList
+    data={collectionList}
+  showsVerticalScrollIndicator={false}
+  renderItem={renderItem}
+  keyExtractor={(item, index) => index.toString()}
+  />
+:
+<View style={[styles.columnStyle,{flex:1}]}>
+<TextComponent
+                                        value={"No collections"}
+                                        fontSize={19}
+                                        fontFamily={DMSansBold}
+                                        color={theme?.theme?.TEXT_COLOR}
+                                    // styles={styles.textViewStyle}
+                                    />
+</View>
+}
+        
 {/* <Spacer height={heightPercentageToDP(2)} /> */}
 </KeyboardAwareScrollView>
 

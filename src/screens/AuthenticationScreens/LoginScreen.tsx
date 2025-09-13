@@ -29,8 +29,9 @@ const LoginScreen = () => {
     const [password, setPassword] = useState('');
     // const [emailAddress, setEmailAddress] = useState('msingh@gosourcery.com');
     // const [password, setPassword] = useState('dajhe3-Deprab-nohpag');
-    const [isPasswordSecure, setIsPasswordSecure] = useState(false);
-    const [modalVisible, setModalVisible] = useState({ title: "", key: "", value: false });
+    const [isPasswordSecure, setIsPasswordSecure] = useState(true);
+    const [apiErrorMessage, setApiErrorMessage] = useState("");
+    const [modalVisible, setModalVisible] = useState({ title: "", key: "", key2: "" , value: false});
     const [emailAddressError, setEmailAddressError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
     const [emailAddressErrorText, setEmailAddressErrorText] = useState("");
@@ -55,6 +56,7 @@ const LoginScreen = () => {
     };
 
     const loginClick =async () => {
+        setApiErrorMessage('')
         if (validateInputs()) {
         Keyboard.dismiss();
         setIsLoading(true);
@@ -64,23 +66,29 @@ const LoginScreen = () => {
                     const tokenKey:any = session.tokens?.idToken?.payload;
                     const badgeAccess = tokenKey?.['custom:badge_scanner_access'];
                     // let loginToken = await loginUser(emailAddress, password);
+                    // console.log("badgeAccessbadgeAccessbadgeAccess",session);
                     if(badgeAccess){
                         const idToken:any = session.tokens?.idToken?.toString();
                         const userId:any = session?.userSub?.toString();
                         console.log("idTokenidTokenidToken",idToken);
+                        console.log("userIduserIduserId",userId);
                         await storeData(key_setLoginToken, idToken);
                         await storeData(key_setUserId, userId);
                         navigateScreen(navigation, S_BottomTabsDashboard);
                     }else{
                         await signOut();
-                        setModalVisible({ title: "Error", key: `You don't have access`, value: true });
+                        // setApiErrorMessage("Ooops! You are not subscribed to the badge scanner app. To subscribe contact us at info@gosourcery.com");
+                        setModalVisible({ title: "Ooops!",
+                             key: 'You are not subscribed to the badge scanner app. To subscribe contact us at',
+                             key2: 'info@gosourcery.com',
+                             value: true });
                     }
                    
                     // setModalVisible({ title: "Success", key: "Login successful", value: true });
                     setIsLoading(false);
                   } catch (err:any) {
                     // console.error('Sign-in error:', err);
-                    setModalVisible({ title: "Error", key: err?.message, value: true });
+                    setModalVisible({ title: "Error", key: err?.message, key2: '', value: true });
                     setIsLoading(false);
                     throw err;
                   }
@@ -235,7 +243,7 @@ const LoginScreen = () => {
                         }} 
                         textWrapperStyle={{letterSpacing: 1.1}}
                     />
-        <Spacer height={40} />
+         <Spacer height={30} />
 
         <ButtonComponent
         title={'LOG IN'}
@@ -263,9 +271,12 @@ const LoginScreen = () => {
             visible={modalVisible.value}
             headingType={modalVisible.title}
             text={modalVisible.key.toString()}
-            textFontSize={modalVisible.title == "" ? 20 : 12}
+            text2={modalVisible.key2.toString()}
+            textFontSize={modalVisible.title == "" ? 20 : 14}
             textColor={theme?.theme?.BLACK_COLOR}
-            onDismiss={() => setModalVisible({ title: "", key: "", value: false })}
+            text2FontSize={14}
+            textColor2={theme?.theme?.BLUE_COLOR}
+            onDismiss={() => setModalVisible({ title: "", key: "", key2: "", value: false })}
             buttonHeight={50}
             buttonWidth={120}
             crossIcon={true}
@@ -273,7 +284,7 @@ const LoginScreen = () => {
             headingTextFontSize={20}
             buttonBackgroundColor={theme?.theme.SECOND_TEXT_COLOR}
             singleButton={true}
-            positiveButtonClick={() => setModalVisible({ title: "", key: "", value: false })}
+            positiveButtonClick={() => setModalVisible({ title: "", key: "", key2: "",value: false })}
             positiveButtonText={'OK'}
         />
         </MainContainer>

@@ -120,7 +120,7 @@ const DashboardScreen = () => {
                     title={'SCAN BADGE'}
                     onHandleClick={() => openCamera()}
                     height={50}
-                    tintColor={theme?.theme.WHITE_COLOR}
+                    tintColor={selectedWorkSpace?.id && selectedCollection?.id? theme?.theme?.WHITE_COLOR :theme?.theme.BLACK_COLOR}
                     iconHeight={20}
                     iconWidth={20}
                     isDisabled={selectedWorkSpace?.id && selectedCollection?.id?  false: true}
@@ -128,7 +128,7 @@ const DashboardScreen = () => {
                     leftIcon={BARCODE_SCANNER_ICON}
                     btnBackgroundColor={theme?.theme.BLUE_COLOR}
                     width={deviceWidth - 50}
-                    fontColor={theme?.theme.WHITE_COLOR}
+                    fontColor={selectedWorkSpace?.id && selectedCollection?.id? theme?.theme?.WHITE_COLOR :theme?.theme.BLACK_COLOR}
                     textStyle={{letterSpacing: 1.1}}
                     />
             <Spacer height={heightPercentageToDP(4)} />
@@ -155,7 +155,7 @@ const DashboardScreen = () => {
             visible={modalVisible.value}
             headingType={modalVisible.title}
             text={modalVisible.key.toString()}
-            textFontSize={modalVisible.title == "" ? 20 : 12}
+            textFontSize={modalVisible.title == "" ? 20 : 14}
             textColor={theme?.theme?.BLACK_COLOR}
             onDismiss={() => setModalVisible({ title: "", key: "", value: false })}
             buttonHeight={50}

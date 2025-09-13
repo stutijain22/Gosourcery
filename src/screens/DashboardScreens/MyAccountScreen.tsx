@@ -106,7 +106,7 @@ const MyAccountScreen = (props: any): JSX.Element => {
           username:userId,
           attributes:userProfileInput}, loginToken,navigation);
 
-        setModalVisible({ title: "Success", key: "Update Successfully", value: true });
+        setModalVisible({ title: "Success", key: "Info Updated Successfully", value: true });
         await storeJSONData(key_setProfileData,data?.updateUserProfile)
         await getProfileData(data?.updateUserProfile)
     }catch (err:any) {
@@ -365,7 +365,7 @@ textWrapperStyle={{letterSpacing: 1.1, borderRadius:30,
             visible={modalVisible.value}
             headingType={modalVisible.title}
             text={modalVisible.key.toString()}
-            textFontSize={modalVisible.title == "" ? 20 : 12}
+            textFontSize={modalVisible.title == "" ? 20 : 14}
             textColor={theme?.theme?.BLACK_COLOR}
             onDismiss={() => setModalVisible({ title: "", key: "", value: false })}
             buttonHeight={50}

@@ -25,18 +25,20 @@ target 'Gosourcery' do
 
   use_react_native!(
     :path => config[:reactNativePath],
-    :hermes_enabled => true,
+    :hermes_enabled => false,
+    # :hermes_enabled => true,
     # :fabric_enabled => false,
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  # Only include Amplify pods if you're using native modules
+  # Only include Amplify pods if  you're using native modules
   # For example, uncomment if you're using analytics/storage
   # pod 'Amplify'
   # pod 'AWSCognitoAuthPlugin'
   # pod 'AWSAPIPlugin'
   # pod 'AWSS3StoragePlugin'
 
+  
   post_install do |installer|
     react_native_post_install(
       installer,

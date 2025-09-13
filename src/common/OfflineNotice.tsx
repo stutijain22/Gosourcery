@@ -33,6 +33,9 @@ const OfflineNotice = (props: any) => {
           setMessage('Slow internet connection.');
           setVisible(true);
           resetTimeout();
+        }else{
+          // setMessage('');
+          setVisible(false);
         }
       };
     const resetTimeout = () => {
@@ -61,7 +64,7 @@ const OfflineNotice = (props: any) => {
 
 const styles = StyleSheet.create({
     offlineContainer: {
-        height: Platform.OS === 'android' ? 50 : 80,
+        height: Platform.OS === 'android' ? 50 : 50,
         justifyContent: 'flex-end',
         alignItems: 'center',
         width: width,

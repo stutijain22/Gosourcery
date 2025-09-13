@@ -12,9 +12,6 @@ PODS:
   - FBLazyVector (0.79.3)
   - fmt (11.0.2)
   - glog (0.3.5)
-  - hermes-engine (0.79.3):
-    - hermes-engine/Pre-built (= 0.79.3)
-  - hermes-engine/Pre-built (0.79.3)
   - RCT-Folly (2024.11.18.00):
     - boost
     - DoubleConversion
@@ -57,13 +54,12 @@ PODS:
   - React-Codegen (0.1.0)
   - React-Core (0.79.3):
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTDeprecation
     - React-Core/Default (= 0.79.3)
     - React-cxxreact
     - React-featureflags
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-jsinspector
@@ -75,13 +71,12 @@ PODS:
     - Yoga
   - React-Core/CoreModulesHeaders (0.79.3):
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTDeprecation
     - React-Core/Default
     - React-cxxreact
     - React-featureflags
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-jsinspector
@@ -93,12 +88,11 @@ PODS:
     - Yoga
   - React-Core/Default (0.79.3):
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTDeprecation
     - React-cxxreact
     - React-featureflags
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-jsinspector
@@ -110,14 +104,13 @@ PODS:
     - Yoga
   - React-Core/DevSupport (0.79.3):
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTDeprecation
     - React-Core/Default (= 0.79.3)
     - React-Core/RCTWebSocket (= 0.79.3)
     - React-cxxreact
     - React-featureflags
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-jsinspector
@@ -129,13 +122,12 @@ PODS:
     - Yoga
   - React-Core/RCTActionSheetHeaders (0.79.3):
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTDeprecation
     - React-Core/Default
     - React-cxxreact
     - React-featureflags
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-jsinspector
@@ -147,13 +139,12 @@ PODS:
     - Yoga
   - React-Core/RCTAnimationHeaders (0.79.3):
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTDeprecation
     - React-Core/Default
     - React-cxxreact
     - React-featureflags
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-jsinspector
@@ -165,13 +156,12 @@ PODS:
     - Yoga
   - React-Core/RCTBlobHeaders (0.79.3):
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTDeprecation
     - React-Core/Default
     - React-cxxreact
     - React-featureflags
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-jsinspector
@@ -183,13 +173,12 @@ PODS:
     - Yoga
   - React-Core/RCTImageHeaders (0.79.3):
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTDeprecation
     - React-Core/Default
     - React-cxxreact
     - React-featureflags
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-jsinspector
@@ -201,13 +190,12 @@ PODS:
     - Yoga
   - React-Core/RCTLinkingHeaders (0.79.3):
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTDeprecation
     - React-Core/Default
     - React-cxxreact
     - React-featureflags
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-jsinspector
@@ -219,13 +207,12 @@ PODS:
     - Yoga
   - React-Core/RCTNetworkHeaders (0.79.3):
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTDeprecation
     - React-Core/Default
     - React-cxxreact
     - React-featureflags
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-jsinspector
@@ -237,13 +224,12 @@ PODS:
     - Yoga
   - React-Core/RCTSettingsHeaders (0.79.3):
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTDeprecation
     - React-Core/Default
     - React-cxxreact
     - React-featureflags
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-jsinspector
@@ -255,13 +241,12 @@ PODS:
     - Yoga
   - React-Core/RCTTextHeaders (0.79.3):
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTDeprecation
     - React-Core/Default
     - React-cxxreact
     - React-featureflags
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-jsinspector
@@ -273,13 +258,12 @@ PODS:
     - Yoga
   - React-Core/RCTVibrationHeaders (0.79.3):
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTDeprecation
     - React-Core/Default
     - React-cxxreact
     - React-featureflags
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-jsinspector
@@ -291,13 +275,12 @@ PODS:
     - Yoga
   - React-Core/RCTWebSocket (0.79.3):
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTDeprecation
     - React-Core/Default (= 0.79.3)
     - React-cxxreact
     - React-featureflags
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-jsinspector
@@ -329,7 +312,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - React-callinvoker (= 0.79.3)
     - React-debug (= 0.79.3)
@@ -342,23 +324,21 @@ PODS:
     - React-timing (= 0.79.3)
   - React-debug (0.79.3)
   - React-defaultsnativemodule (0.79.3):
-    - hermes-engine
     - RCT-Folly
     - React-domnativemodule
     - React-featureflagsnativemodule
-    - React-hermes
     - React-idlecallbacksnativemodule
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-microtasksnativemodule
     - React-RCTFBReactNativeSpec
   - React-domnativemodule (0.79.3):
-    - hermes-engine
     - RCT-Folly
     - React-Fabric
     - React-FabricComponents
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-RCTFBReactNativeSpec
@@ -369,7 +349,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -394,7 +373,7 @@ PODS:
     - React-Fabric/uimanager (= 0.79.3)
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -407,7 +386,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -416,7 +394,7 @@ PODS:
     - React-debug
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -429,7 +407,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -438,7 +415,7 @@ PODS:
     - React-debug
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -451,7 +428,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -460,7 +436,7 @@ PODS:
     - React-debug
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -473,7 +449,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -482,7 +457,7 @@ PODS:
     - React-debug
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -495,7 +470,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -508,7 +482,7 @@ PODS:
     - React-Fabric/components/view (= 0.79.3)
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -521,7 +495,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -530,7 +503,7 @@ PODS:
     - React-debug
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -543,7 +516,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -552,7 +524,7 @@ PODS:
     - React-debug
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -565,7 +537,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -574,7 +545,7 @@ PODS:
     - React-debug
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -587,7 +558,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -596,7 +566,7 @@ PODS:
     - React-debug
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -611,7 +581,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -620,7 +589,7 @@ PODS:
     - React-debug
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -633,7 +602,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -642,7 +610,7 @@ PODS:
     - React-debug
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -655,7 +623,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -664,7 +631,7 @@ PODS:
     - React-debug
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -677,7 +644,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -686,7 +652,7 @@ PODS:
     - React-debug
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -699,7 +665,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -708,7 +673,7 @@ PODS:
     - React-debug
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -721,7 +686,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -730,7 +694,7 @@ PODS:
     - React-debug
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -743,7 +707,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -753,7 +716,7 @@ PODS:
     - React-Fabric/observers/events (= 0.79.3)
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -766,7 +729,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -775,7 +737,7 @@ PODS:
     - React-debug
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -788,7 +750,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -798,7 +759,7 @@ PODS:
     - React-Fabric/observers/events
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -812,7 +773,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -821,7 +781,7 @@ PODS:
     - React-debug
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -834,7 +794,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -843,7 +802,7 @@ PODS:
     - React-debug
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -856,7 +815,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -866,7 +824,7 @@ PODS:
     - React-Fabric/uimanager/consistency (= 0.79.3)
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -880,7 +838,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -889,7 +846,7 @@ PODS:
     - React-debug
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -903,7 +860,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -915,7 +871,7 @@ PODS:
     - React-FabricComponents/textlayoutmanager (= 0.79.3)
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -929,7 +885,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -948,7 +903,7 @@ PODS:
     - React-FabricComponents/components/unimplementedview (= 0.79.3)
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -962,7 +917,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -972,7 +926,7 @@ PODS:
     - React-Fabric
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -986,7 +940,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -996,7 +949,7 @@ PODS:
     - React-Fabric
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -1010,7 +963,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -1020,7 +972,7 @@ PODS:
     - React-Fabric
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -1034,7 +986,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -1044,7 +995,7 @@ PODS:
     - React-Fabric
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -1058,7 +1009,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -1068,7 +1018,7 @@ PODS:
     - React-Fabric
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -1082,7 +1032,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -1092,7 +1041,7 @@ PODS:
     - React-Fabric
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -1106,7 +1055,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -1116,7 +1064,7 @@ PODS:
     - React-Fabric
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -1130,7 +1078,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -1140,7 +1087,7 @@ PODS:
     - React-Fabric
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -1154,7 +1101,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -1164,7 +1110,7 @@ PODS:
     - React-Fabric
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -1178,7 +1124,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -1188,7 +1133,7 @@ PODS:
     - React-Fabric
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-logger
@@ -1202,15 +1147,14 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - RCTRequired (= 0.79.3)
     - RCTTypeSafety (= 0.79.3)
     - React-Fabric
     - React-featureflags
     - React-graphics
-    - React-hermes
     - React-ImageManager
+    - React-jsc
     - React-jsi
     - React-jsiexecutor (= 0.79.3)
     - React-logger
@@ -1221,10 +1165,9 @@ PODS:
   - React-featureflags (0.79.3):
     - RCT-Folly (= 2024.11.18.00)
   - React-featureflagsnativemodule (0.79.3):
-    - hermes-engine
     - RCT-Folly
     - React-featureflags
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-RCTFBReactNativeSpec
@@ -1234,31 +1177,15 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-utils
-  - React-hermes (0.79.3):
-    - DoubleConversion
-    - fast_float (= 6.1.4)
-    - fmt (= 11.0.2)
-    - glog
-    - hermes-engine
-    - RCT-Folly (= 2024.11.18.00)
-    - React-cxxreact (= 0.79.3)
-    - React-jsi
-    - React-jsiexecutor (= 0.79.3)
-    - React-jsinspector
-    - React-jsinspectortracing
-    - React-perflogger (= 0.79.3)
-    - React-runtimeexecutor
   - React-idlecallbacksnativemodule (0.79.3):
     - glog
-    - hermes-engine
     - RCT-Folly
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-RCTFBReactNativeSpec
@@ -1273,9 +1200,13 @@ PODS:
     - React-graphics
     - React-rendererdebug
     - React-utils
+  - React-jsc (0.79.3):
+    - React-jsc/Fabric (= 0.79.3)
+    - React-jsi (= 0.79.3)
+  - React-jsc/Fabric (0.79.3):
+    - React-jsi (= 0.79.3)
   - React-jserrorhandler (0.79.3):
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - React-cxxreact
     - React-debug
@@ -1288,14 +1219,12 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
   - React-jsiexecutor (0.79.3):
     - DoubleConversion
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - React-cxxreact (= 0.79.3)
     - React-jsi (= 0.79.3)
@@ -1305,7 +1234,6 @@ PODS:
   - React-jsinspector (0.79.3):
     - DoubleConversion
     - glog
-    - hermes-engine
     - RCT-Folly
     - React-featureflags
     - React-jsi
@@ -1333,9 +1261,8 @@ PODS:
     - glog
     - React-debug
   - React-microtasksnativemodule (0.79.3):
-    - hermes-engine
     - RCT-Folly
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-RCTFBReactNativeSpec
@@ -1347,7 +1274,6 @@ PODS:
   - react-native-safe-area-context (5.5.2):
     - DoubleConversion
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -1356,8 +1282,8 @@ PODS:
     - React-Fabric
     - React-featureflags
     - React-graphics
-    - React-hermes
     - React-ImageManager
+    - React-jsc
     - React-jsi
     - react-native-safe-area-context/common (= 5.5.2)
     - react-native-safe-area-context/fabric (= 5.5.2)
@@ -1373,7 +1299,6 @@ PODS:
   - react-native-safe-area-context/common (5.5.2):
     - DoubleConversion
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -1382,8 +1307,8 @@ PODS:
     - React-Fabric
     - React-featureflags
     - React-graphics
-    - React-hermes
     - React-ImageManager
+    - React-jsc
     - React-jsi
     - React-NativeModulesApple
     - React-RCTFabric
@@ -1397,7 +1322,6 @@ PODS:
   - react-native-safe-area-context/fabric (5.5.2):
     - DoubleConversion
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -1406,8 +1330,8 @@ PODS:
     - React-Fabric
     - React-featureflags
     - React-graphics
-    - React-hermes
     - React-ImageManager
+    - React-jsc
     - React-jsi
     - react-native-safe-area-context/common
     - React-NativeModulesApple
@@ -1421,12 +1345,11 @@ PODS:
     - Yoga
   - React-NativeModulesApple (0.79.3):
     - glog
-    - hermes-engine
     - React-callinvoker
     - React-Core
     - React-cxxreact
     - React-featureflags
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsinspector
     - React-runtimeexecutor
@@ -1454,7 +1377,6 @@ PODS:
     - React-RCTFBReactNativeSpec
     - ReactCommon
   - React-RCTAppDelegate (0.79.3):
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -1465,7 +1387,7 @@ PODS:
     - React-Fabric
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsitooling
     - React-NativeModulesApple
     - React-RCTFabric
@@ -1483,7 +1405,6 @@ PODS:
     - DoubleConversion
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - React-Core/RCTBlobHeaders
     - React-Core/RCTWebSocket
@@ -1495,7 +1416,6 @@ PODS:
     - ReactCommon
   - React-RCTFabric (0.79.3):
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - React-Core
     - React-debug
@@ -1504,8 +1424,8 @@ PODS:
     - React-FabricImage
     - React-featureflags
     - React-graphics
-    - React-hermes
     - React-ImageManager
+    - React-jsc
     - React-jsi
     - React-jsinspector
     - React-jsinspectortracing
@@ -1520,12 +1440,11 @@ PODS:
     - React-utils
     - Yoga
   - React-RCTFBReactNativeSpec (0.79.3):
-    - hermes-engine
     - RCT-Folly
     - RCTRequired
     - RCTTypeSafety
     - React-Core
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-NativeModulesApple
@@ -1556,17 +1475,15 @@ PODS:
     - ReactCommon
   - React-RCTRuntime (0.79.3):
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - React-Core
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsinspector
     - React-jsinspectortracing
     - React-jsitooling
     - React-RuntimeApple
     - React-RuntimeCore
-    - React-RuntimeHermes
   - React-RCTSettings (0.79.3):
     - RCT-Folly (= 2024.11.18.00)
     - RCTTypeSafety
@@ -1597,13 +1514,13 @@ PODS:
     - React-debug
   - React-rncore (0.79.3)
   - React-RuntimeApple (0.79.3):
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - React-callinvoker
     - React-Core/Default
     - React-CoreModules
     - React-cxxreact
     - React-featureflags
+    - React-jsc
     - React-jserrorhandler
     - React-jsi
     - React-jsiexecutor
@@ -1615,17 +1532,15 @@ PODS:
     - React-RCTFBReactNativeSpec
     - React-RuntimeCore
     - React-runtimeexecutor
-    - React-RuntimeHermes
     - React-runtimescheduler
     - React-utils
   - React-RuntimeCore (0.79.3):
     - glog
-    - hermes-engine
     - RCT-Folly/Fabric (= 2024.11.18.00)
     - React-cxxreact
     - React-Fabric
     - React-featureflags
-    - React-hermes
+    - React-jsc
     - React-jserrorhandler
     - React-jsi
     - React-jsiexecutor
@@ -1637,27 +1552,14 @@ PODS:
     - React-utils
   - React-runtimeexecutor (0.79.3):
     - React-jsi (= 0.79.3)
-  - React-RuntimeHermes (0.79.3):
-    - hermes-engine
-    - RCT-Folly/Fabric (= 2024.11.18.00)
-    - React-featureflags
-    - React-hermes
-    - React-jsi
-    - React-jsinspector
-    - React-jsinspectortracing
-    - React-jsitooling
-    - React-jsitracing
-    - React-RuntimeCore
-    - React-utils
   - React-runtimescheduler (0.79.3):
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - React-callinvoker
     - React-cxxreact
     - React-debug
     - React-featureflags
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsinspectortracing
     - React-performancetimeline
@@ -1669,17 +1571,15 @@ PODS:
   - React-timing (0.79.3)
   - React-utils (0.79.3):
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - React-debug
-    - React-hermes
+    - React-jsc
     - React-jsi (= 0.79.3)
   - ReactAppDependencyProvider (0.79.3):
     - ReactCodegen
   - ReactCodegen (0.79.3):
     - DoubleConversion
     - glog
-    - hermes-engine
     - RCT-Folly
     - RCTRequired
     - RCTTypeSafety
@@ -1689,7 +1589,7 @@ PODS:
     - React-FabricImage
     - React-featureflags
     - React-graphics
-    - React-hermes
+    - React-jsc
     - React-jsi
     - React-jsiexecutor
     - React-NativeModulesApple
@@ -1705,7 +1605,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - React-callinvoker (= 0.79.3)
     - React-cxxreact (= 0.79.3)
@@ -1719,7 +1618,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - React-callinvoker (= 0.79.3)
     - React-cxxreact (= 0.79.3)
@@ -1731,7 +1629,6 @@ PODS:
     - fast_float (= 6.1.4)
     - fmt (= 11.0.2)
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - React-callinvoker (= 0.79.3)
     - React-cxxreact (= 0.79.3)
@@ -1744,7 +1641,6 @@ PODS:
   - ReactNativeCameraKit (15.1.0):
     - DoubleConversion
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -1753,8 +1649,8 @@ PODS:
     - React-Fabric
     - React-featureflags
     - React-graphics
-    - React-hermes
     - React-ImageManager
+    - React-jsc
     - React-jsi
     - React-NativeModulesApple
     - React-RCTFabric
@@ -1768,7 +1664,6 @@ PODS:
   - RNCAsyncStorage (2.2.0):
     - DoubleConversion
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -1777,8 +1672,8 @@ PODS:
     - React-Fabric
     - React-featureflags
     - React-graphics
-    - React-hermes
     - React-ImageManager
+    - React-jsc
     - React-jsi
     - React-NativeModulesApple
     - React-RCTFabric
@@ -1792,7 +1687,6 @@ PODS:
   - RNCMaskedView (0.3.2):
     - DoubleConversion
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -1801,8 +1695,8 @@ PODS:
     - React-Fabric
     - React-featureflags
     - React-graphics
-    - React-hermes
     - React-ImageManager
+    - React-jsc
     - React-jsi
     - React-NativeModulesApple
     - React-RCTFabric
@@ -1818,7 +1712,6 @@ PODS:
   - RNGestureHandler (2.27.2):
     - DoubleConversion
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -1828,8 +1721,8 @@ PODS:
     - React-FabricComponents
     - React-featureflags
     - React-graphics
-    - React-hermes
     - React-ImageManager
+    - React-jsc
     - React-jsi
     - React-NativeModulesApple
     - React-RCTFabric
@@ -1843,7 +1736,6 @@ PODS:
   - RNPermissions (5.4.2):
     - DoubleConversion
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -1852,8 +1744,8 @@ PODS:
     - React-Fabric
     - React-featureflags
     - React-graphics
-    - React-hermes
     - React-ImageManager
+    - React-jsc
     - React-jsi
     - React-NativeModulesApple
     - React-RCTFabric
@@ -1867,7 +1759,6 @@ PODS:
   - RNReanimated (3.19.0):
     - DoubleConversion
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -1876,8 +1767,8 @@ PODS:
     - React-Fabric
     - React-featureflags
     - React-graphics
-    - React-hermes
     - React-ImageManager
+    - React-jsc
     - React-jsi
     - React-NativeModulesApple
     - React-RCTFabric
@@ -1893,7 +1784,6 @@ PODS:
   - RNReanimated/reanimated (3.19.0):
     - DoubleConversion
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -1902,8 +1792,8 @@ PODS:
     - React-Fabric
     - React-featureflags
     - React-graphics
-    - React-hermes
     - React-ImageManager
+    - React-jsc
     - React-jsi
     - React-NativeModulesApple
     - React-RCTFabric
@@ -1918,7 +1808,6 @@ PODS:
   - RNReanimated/reanimated/apple (3.19.0):
     - DoubleConversion
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -1927,8 +1816,8 @@ PODS:
     - React-Fabric
     - React-featureflags
     - React-graphics
-    - React-hermes
     - React-ImageManager
+    - React-jsc
     - React-jsi
     - React-NativeModulesApple
     - React-RCTFabric
@@ -1942,7 +1831,6 @@ PODS:
   - RNReanimated/worklets (3.19.0):
     - DoubleConversion
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -1951,8 +1839,8 @@ PODS:
     - React-Fabric
     - React-featureflags
     - React-graphics
-    - React-hermes
     - React-ImageManager
+    - React-jsc
     - React-jsi
     - React-NativeModulesApple
     - React-RCTFabric
@@ -1967,7 +1855,6 @@ PODS:
   - RNReanimated/worklets/apple (3.19.0):
     - DoubleConversion
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -1976,8 +1863,8 @@ PODS:
     - React-Fabric
     - React-featureflags
     - React-graphics
-    - React-hermes
     - React-ImageManager
+    - React-jsc
     - React-jsi
     - React-NativeModulesApple
     - React-RCTFabric
@@ -1991,7 +1878,6 @@ PODS:
   - RNScreens (4.13.1):
     - DoubleConversion
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -2000,8 +1886,8 @@ PODS:
     - React-Fabric
     - React-featureflags
     - React-graphics
-    - React-hermes
     - React-ImageManager
+    - React-jsc
     - React-jsi
     - React-NativeModulesApple
     - React-RCTFabric
@@ -2017,7 +1903,6 @@ PODS:
   - RNScreens/common (4.13.1):
     - DoubleConversion
     - glog
-    - hermes-engine
     - RCT-Folly (= 2024.11.18.00)
     - RCTRequired
     - RCTTypeSafety
@@ -2026,8 +1911,8 @@ PODS:
     - React-Fabric
     - React-featureflags
     - React-graphics
-    - React-hermes
     - React-ImageManager
+    - React-jsc
     - React-jsi
     - React-NativeModulesApple
     - React-RCTFabric
@@ -2050,7 +1935,6 @@ DEPENDENCIES:
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - fmt (from `../node_modules/react-native/third-party-podspecs/fmt.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
-  - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCT-Folly/Fabric (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTDeprecation (from `../node_modules/react-native/ReactApple/Libraries/RCTFoundation/RCTDeprecation`)
@@ -2071,9 +1955,10 @@ DEPENDENCIES:
   - React-featureflags (from `../node_modules/react-native/ReactCommon/react/featureflags`)
   - React-featureflagsnativemodule (from `../node_modules/react-native/ReactCommon/react/nativemodule/featureflags`)
   - React-graphics (from `../node_modules/react-native/ReactCommon/react/renderer/graphics`)
-  - React-hermes (from `../node_modules/react-native/ReactCommon/hermes`)
   - React-idlecallbacksnativemodule (from `../node_modules/react-native/ReactCommon/react/nativemodule/idlecallbacks`)
   - React-ImageManager (from `../node_modules/react-native/ReactCommon/react/renderer/imagemanager/platform/ios`)
+  - React-jsc (from `../node_modules/react-native/ReactCommon/jsc`)
+  - React-jsc/Fabric (from `../node_modules/react-native/ReactCommon/jsc`)
   - React-jserrorhandler (from `../node_modules/react-native/ReactCommon/jserrorhandler`)
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
@@ -2111,7 +1996,6 @@ DEPENDENCIES:
   - React-RuntimeApple (from `../node_modules/react-native/ReactCommon/react/runtime/platform/ios`)
   - React-RuntimeCore (from `../node_modules/react-native/ReactCommon/react/runtime`)
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
-  - React-RuntimeHermes (from `../node_modules/react-native/ReactCommon/react/runtime`)
   - React-runtimescheduler (from `../node_modules/react-native/ReactCommon/react/renderer/runtimescheduler`)
   - React-timing (from `../node_modules/react-native/ReactCommon/react/timing`)
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
@@ -2148,9 +2032,6 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/fmt.podspec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
-  hermes-engine:
-    :podspec: "../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec"
-    :tag: hermes-2025-06-04-RNv0.79.3-7f9a871eefeb2c3852365ee80f0b6733ec12ac3b
   RCT-Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTDeprecation:
@@ -2187,12 +2068,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/react/nativemodule/featureflags"
   React-graphics:
     :path: "../node_modules/react-native/ReactCommon/react/renderer/graphics"
-  React-hermes:
-    :path: "../node_modules/react-native/ReactCommon/hermes"
   React-idlecallbacksnativemodule:
     :path: "../node_modules/react-native/ReactCommon/react/nativemodule/idlecallbacks"
   React-ImageManager:
     :path: "../node_modules/react-native/ReactCommon/react/renderer/imagemanager/platform/ios"
+  React-jsc:
+    :path: "../node_modules/react-native/ReactCommon/jsc"
   React-jserrorhandler:
     :path: "../node_modules/react-native/ReactCommon/jserrorhandler"
   React-jsi:
@@ -2267,8 +2148,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/react/runtime"
   React-runtimeexecutor:
     :path: "../node_modules/react-native/ReactCommon/runtimeexecutor"
-  React-RuntimeHermes:
-    :path: "../node_modules/react-native/ReactCommon/react/runtime"
   React-runtimescheduler:
     :path: "../node_modules/react-native/ReactCommon/react/renderer/runtimescheduler"
   React-timing:
@@ -2308,7 +2187,6 @@ SPEC CHECKSUMS:
   FBLazyVector: a62a7a5760929b6265e27bc01ab7598dde93ebd3
   fmt: a40bb5bd0294ea969aaaba240a927bd33d878cdd
   glog: 5683914934d5b6e4240e497e0f4a3b42d1854183
-  hermes-engine: 94ed01537bdeccaab1adbf94b040d115d6fa1a7f
   RCT-Folly: e78785aa9ba2ed998ea4151e314036f6c49e6d82
   RCTDeprecation: c3e3f5b4ea83e7ff3bc86ce09e2a54b7affd687d
   RCTRequired: ee438439880dffc9425930d1dd1a3c883ee6879c
@@ -2316,48 +2194,48 @@ SPEC CHECKSUMS:
   React: 114ee161feb204412580928b743e6716aebac987
   React-callinvoker: d175cf3640a993f6cd960044a7657543157f0ba9
   React-Codegen: 4b8b4817cea7a54b83851d4c1f91f79aa73de30a
-  React-Core: cd487c9eeb125c902242bcc76ced12e14adf4ea4
+  React-Core: c443d9127937d25f48a5bd8d2475ce61159cbfcc
   React-CoreModules: 202df4f342e5c2893d5d1899b2856879a90d4bf1
-  React-cxxreact: 72be57cebb9976199e6130ec6f9d511c6ae3b310
+  React-cxxreact: d97c71653bb260ad0e75069a9c7f8241e6b83478
   React-debug: d2042a489905b47cb1a987bb9eacc81a68e89587
-  React-defaultsnativemodule: db406c1b44ed9fd30ef9c86a2d0529c4ba8ed8c9
-  React-domnativemodule: f71e27c03fbdeaa5a318576beb99b997267dfa31
-  React-Fabric: 84377d3efd7f7fb832eb48674c64a4f1b75bc68f
-  React-FabricComponents: e99187e0dcd333cba72d7ac931c06dea66c60849
-  React-FabricImage: 0cd0b4b1ad571648c9aa74060075f425bb1a0baf
+  React-defaultsnativemodule: 2fcd5d63da733411c4873bfafa16571b0676b83a
+  React-domnativemodule: 84bf17f12dacd27acf02d5a6ab587ef6ebcfd93e
+  React-Fabric: 0b2f74f3f1a21296e558ebdfd0a19389ad037d61
+  React-FabricComponents: 7a1c14eb9772f6767d4c68e3278c0f0ba20395ed
+  React-FabricImage: f7d27fcefe8a89f48e905da695463332d9c11325
   React-featureflags: 8d2d86c7d0812ab474cb326b854c987f44633c72
-  React-featureflagsnativemodule: bd54ca89ed64d31a61a17fa103a991fcfee70821
-  React-graphics: bad51b93c457bb7517540bc9d112e8218773dfe1
-  React-hermes: a40e47b18c31efe4baa7942357e2327ddab63918
-  React-idlecallbacksnativemodule: 75f7e8b32e74c78124297ba73c1b3e6ac08fd39b
+  React-featureflagsnativemodule: 5e5f371eb9a2f5bdbde6ef646802c7b00e7ec221
+  React-graphics: f94bb549e15981f46885462fe3aad16ddcb059e2
+  React-idlecallbacksnativemodule: 90fd7b3ae4574ad50510c2c06edc22091530ade3
   React-ImageManager: 529243f1b6094af8a8dd58aef885f9afb1c73d8c
-  React-jserrorhandler: bbd5fd904735fac723afc84d295fb17558956698
-  React-jsi: ae02c9d6d68dbed80a9fde8f6d6198035ca154ce
-  React-jsiexecutor: 8c266057f23430685a2d928703e77eda80e1742e
-  React-jsinspector: 1971f190bf2f1ee72f9e1e0e6f56f2f42024fdb2
+  React-jsc: 81350d8c47d227c07f673c288a1218b7bd637876
+  React-jserrorhandler: 10f0cdc3d10d19d36c863a5b18e5f552e5065670
+  React-jsi: 71aee1acfcc7fb159deafe68ff533fb4d7773049
+  React-jsiexecutor: 304e81df84e0686983e889500af504b52a2a5c52
+  React-jsinspector: 159f7171b399d9f29247f249e78c4040bae24bc1
   React-jsinspectortracing: 56c50684abc51cbf959a6bbba4ec20fe02f20259
   React-jsitooling: 0a516b47b6b1c427751ae2a5537c07dd5af60470
   React-jsitracing: 6aa49f8c5a07eb1c042a924419ecd5d39c2e2098
   React-logger: 514fac028fee60c84591f951c7c04ba1c5023334
   React-Mapbuffer: 02f95b72f631228befdfb7e71ad8e2e12b6dae0d
-  React-microtasksnativemodule: 953b922f9473c100dd153cc51739e0d210bfd617
+  React-microtasksnativemodule: 281288733e51b1cdb03464c574b27e0f9096bd50
   react-native-get-random-values: d16467cf726c618e9c7a8c3c39c31faa2244bbba
   react-native-netinfo: cec9c4e86083cb5b6aba0e0711f563e2fbbff187
-  react-native-safe-area-context: 5e61d0541825a113f60c01e061974355fec8d7c1
-  React-NativeModulesApple: 579cac2962d42ffee0d8aae48752f30c4e498bb9
+  react-native-safe-area-context: b904f7219863942c263f30e3bb1b74b26e7d71ca
+  React-NativeModulesApple: 18952798ece30901265a2b6cd701b8d71bcdb104
   React-oscompat: f26aa2a4adc84c34212ab12c07988fe19e9cf16a
   React-perflogger: e15a0d43d1928e1c82f4f0b7fc05f7e9bccfede8
   React-performancetimeline: 117ad5127882ec6a459435d1397d713e35760be7
   React-RCTActionSheet: c89c8b9b7c3ef87cb6a67e20f5eaea271f4b5f67
   React-RCTAnimation: e00af558ccb5fedd380ae32329be4c38e92e9b90
-  React-RCTAppDelegate: 10d98d4867643322fa4fcd04548359ac88c74656
-  React-RCTBlob: ef645bccf9c33d3b4391794983744da897474dfb
-  React-RCTFabric: bb4d7c817e3228d6e55052a420e6ec2892a6a702
-  React-RCTFBReactNativeSpec: e0942c2c7efa10303c63e287c1c1788aeb6d99ef
+  React-RCTAppDelegate: 762c1dae0d8710f1486aa06b8c5462b491617998
+  React-RCTBlob: b95ba3a172f94dbde7710e21e5f86261a83d7875
+  React-RCTFabric: 5ff9eaa6f192a823ff582514fa34fcfcef0addba
+  React-RCTFBReactNativeSpec: 4f2d327bbb78c909dacbbf87f09999a9feaa07f9
   React-RCTImage: 0e3669a0bda8995874736d0f8f12c21d522df3c4
   React-RCTLinking: bd81ec3d1b6686a7c58bc8ed8b7a1f05ff2b3f8b
   React-RCTNetwork: 20b8044841a043b80e7027e1bc4049ffa552d1fa
-  React-RCTRuntime: 13b115119851e0bb55cc7e3f347d763b7c6d9e40
+  React-RCTRuntime: 53fd5123cff848a8254e96a469a4d8dd26ab2d9a
   React-RCTSettings: fa1d3e6c302e9980b5670315e2ccc998255ce32a
   React-RCTText: 71f01a9261c015b76702e9d7a4153c9ca45f2341
   React-RCTVibration: 0e05fa4647ec1391c409fcc1cbd7cdb4894d80ef
@@ -2365,27 +2243,26 @@ SPEC CHECKSUMS:
   React-renderercss: f40da71385a7950b778c185e77a3979853f9827c
   React-rendererdebug: c189ec79cb8a585c973c404f3341c4a8627e3a98
   React-rncore: 9f8b4d93dba987f5209346404ef740c6b6105d73
-  React-RuntimeApple: 4f2fd7353b517ec268f7fb076976354c1de5d086
-  React-RuntimeCore: 134e3e2982f4afceb751c0b3fdf6c5f3e1768def
+  React-RuntimeApple: 993ce3dcafc4aac32c84a30b2573eb30dd9ab42b
+  React-RuntimeCore: 3cc8b154b7825ccdddb7543e79544b564c229acc
   React-runtimeexecutor: 4e7bc0119ff38f80df43d109ef9508497cac1eee
-  React-RuntimeHermes: 0608c43ea0a6e746e964678b343dc439c3e198f8
-  React-runtimescheduler: b9d753b1d34c274261ed14fa35151b38232a7f13
+  React-runtimescheduler: 73a2ab42f9098f8b8b5049407a340852b2d71abd
   React-timing: 220bf771493c44a15fdbdedad2cf0a2e3c41edcd
-  React-utils: a439ca94e40a809a832ad8329698df0146eaccc8
+  React-utils: 9a8d3fc93be637676ab673cedda44214f83a9902
   ReactAppDependencyProvider: e6d0c3c3cc9862a3ccef0c252835cd7ccb96313d
-  ReactCodegen: b7a5501bc78f39a131711787b906e4682ef5c8e7
-  ReactCommon: 4dbe3f8218c0b6589e982081f503725057457d2b
-  ReactNativeCameraKit: d6ddbeddcd1eea74cf480f98fda4d18c9d13de88
-  RNCAsyncStorage: c1dca434eda758348a549efb46822b4091d76804
-  RNCMaskedView: d72fac1c6517be910e8be1370ac324059bcbe677
+  ReactCodegen: fee6ca93a65d041bf053cf0589eb95fe1eb20528
+  ReactCommon: 68bb7fb191ce0b4887eade3d14b31da4881f131e
+  ReactNativeCameraKit: bcd5f38ac08dc34d3515dfa47ec165ebde1cdf40
+  RNCAsyncStorage: 5d937f122486ed154e002abe1cbf034234a873dd
+  RNCMaskedView: 87f0cc80006887dd555116d5b0a1048a1c623172
   RNDeviceInfo: d863506092aef7e7af3a1c350c913d867d795047
-  RNGestureHandler: 4fbe7fbce86b6b546f75c9db974974262f75ef5d
-  RNPermissions: 913e830a18973804e2ca7cd38786e8d0c8f821eb
-  RNReanimated: 35a5a59798fe9a9a61259146be9fe8b0b602ab39
-  RNScreens: b13e4c45f0406f33986a39c0d8da0324bff94435
+  RNGestureHandler: 0ead58b57fb18242775e2e79f454ee688e89eff5
+  RNPermissions: 5b2a2ec4562a7ac31d2570583cc28bb7ae201b83
+  RNReanimated: 8b25aa2d5b93bc48e037687681c30a4cbbf94aef
+  RNScreens: abd1e956c2e991af4bc39d27c9cb3d14e3f3d7f8
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: b2eaabf17044cd4273a661b14eb83f9fd2c90491
 
-PODFILE CHECKSUM: bf3561bef766e86b13fdee0f3c9b1fee00f80d31
+PODFILE CHECKSUM: 427f1bcdb92c94ce61e35f84e51ad16c0149413b
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

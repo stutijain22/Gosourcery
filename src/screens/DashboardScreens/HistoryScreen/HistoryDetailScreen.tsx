@@ -121,7 +121,7 @@ const sendClick =async () =>{
           leftIconStyle={{width:20,height:20,tintColor:theme?.theme.BLACK_COLOR}}
           onLeftPress={() => goBack(navigation)}
           height={50}
-          middleText={'History Details'}
+          middleText={'Lead Details'}
           fontSize={18}
           fontColor={theme?.theme?.BLACK_COLOR}
           mainContainer={{backgroundColor:theme?.theme.WHITE_COLOR}}
@@ -155,7 +155,7 @@ const sendClick =async () =>{
              textAlign={'center'}
              styles={{ letterSpacing: 1.1 }}
             color={theme?.theme.WHITE_COLOR}
-            value={itemDetail?.firstName?.charAt(0) + itemDetail?.lastName?.charAt(0)} />
+            value={itemDetail?.firstName?.charAt(0).toUpperCase() + itemDetail?.lastName?.charAt(0).toUpperCase()} />
           {/* </View> */}
           <Spacer width={30}/>
           {/* <View style={{flex:1}}>

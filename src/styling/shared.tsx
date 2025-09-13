@@ -37,13 +37,12 @@ export const splashScreenStyle = {
 
 
 export const shadowStyle = {
-    // shadowColor: theme1,
-    shadowColor: "rgba(0, 0, 0, 0.25)",
+    shadowColor: "rgba(0, 0, 0, 0.15)", // lighter black
     shadowOffset: {
-        width: 2,
-        height: 10,
+      width: 0,
+      height: 4, // reduce vertical offset
     },
-    shadowRadius: 5,
-    shadowOpacity: 1.25,
-    elevation: 1
+    shadowRadius: 4, // softer blur
+    shadowOpacity: 0.25, // 25% visible
+    elevation: 2
 };

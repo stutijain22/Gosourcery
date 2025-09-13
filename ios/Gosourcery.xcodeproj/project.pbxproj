@@ -174,9 +174,10 @@
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
+				29C145922E60A03500FCD808 /* Generate Hermes dSYMs */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				ADB475C333A703209E2EE715 /* [CP] Copy Pods Resources */,
-				D429141035028BB6F7AF10E5 /* [CP] Embed Pods Frameworks */,
+				29DD1FD42E609D5F001487B0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -267,6 +268,43 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
+		29C145922E60A03500FCD808 /* Generate Hermes dSYMs */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Hermes dSYMs";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nset -e\n\nexport HERMES_ENGINE=hermes\nexport RCT_NO_LAUNCH_PACKAGER=1\nexport DONT_BUNDLE_JS=1\n\n# Run Hermes dSYM generation script\nHERMES_SCRIPT=\"${SRCROOT}/../node_modules/react-native/scripts/generate-dsyms.sh\"\n\nif [ -f \"$HERMES_SCRIPT\" ]; then\n  bash \"$HERMES_SCRIPT\" || true\nfi\n\n# Look for Hermes.framework.dSYM inside build products\nBUILD_DIR=\"${BUILD_DIR:-$CONFIGURATION_BUILD_DIR}\"\nHERMES_DSYM_SRC=\"${BUILD_DIR}/hermes.framework.dSYM\"\nDEST_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n\nif [ -d \"$HERMES_DSYM_SRC\" ]; then\n  echo \"Copying Hermes dSYMs from $HERMES_DSYM_SRC to $DEST_DSYM_DIR\"\n  cp -R \"$HERMES_DSYM_SRC\" \"$DEST_DSYM_DIR\" || true\nelse\n  echo \"⚠️ Hermes dSYM not found in $HERMES_DSYM_SRC\"\nfi\n\n";
+		};
+		29DD1FD42E609D5F001487B0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nset -e\n\n# Where Hermes stores its dSYMs\nHERMES_DSYM_DIR=\"${SRCROOT}/../node_modules/react-native/sdks/hermesc/osx-bin\"\nDEST_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n\necho \"Copying Hermes dSYMs...\"\nif [ -d \"$HERMES_DSYM_DIR\" ]; then\n  cp -R \"$HERMES_DSYM_DIR\"/*.dSYM \"$DEST_DSYM_DIR\" || true\nelse\n  echo \"No Hermes dSYMs found at $HERMES_DSYM_DIR\"\nfi\n";
+		};
 		39624B90C335D9C136293FDC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -310,27 +348,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Gosourcery/Pods-Gosourcery-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D429141035028BB6F7AF10E5 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Gosourcery/Pods-Gosourcery-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Gosourcery/Pods-Gosourcery-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Gosourcery/Pods-Gosourcery-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -352,22 +369,26 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3B4XUYX6AY;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 44U4562V2F;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Gosourcery/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.gosourcery;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gosourcery.badgescanner;
 				PRODUCT_NAME = Gosourcery;
+				STRIP_INSTALLED_PRODUCT = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -381,21 +402,25 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3B4XUYX6AY;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 44U4562V2F;
 				INFOPLIST_FILE = Gosourcery/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.gosourcery;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gosourcery.badgescanner;
 				PRODUCT_NAME = Gosourcery;
+				STRIP_INSTALLED_PRODUCT = YES;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -432,6 +457,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
@@ -484,8 +510,9 @@
 				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
+				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
-				USE_HERMES = true;
+				USE_HERMES = false;
 			};
 			name = Debug;
 		};
@@ -519,7 +546,8 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
@@ -564,7 +592,8 @@
 				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
-				USE_HERMES = true;
+				STRIP_INSTALLED_PRODUCT = NO;
+				USE_HERMES = false;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

@@ -27,7 +27,7 @@ export const callGraphQL = async (query: string, variables: any = {}, token: str
       if (json.errors) {
         const message = json.errors[0]?.message?.toLowerCase();
         const errorCode = json.errors[0]?.errorType;
-console.log('message-- ==> ', message);
+// console.log('message-- ==> ', message);
   
         if (errorCode === "UnauthorizedException" || message.includes('Token has expired')) {
           console.warn('🔐 Session expired, redirecting to login...');

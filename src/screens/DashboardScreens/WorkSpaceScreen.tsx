@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MainContainer1, MainContainer2, shadowStyle } from "../../styling/shared";
 import { getData, getJSONData, storeData, storeJSONData } from '../../utils/AsyncStorage';
-import { DMSansBold, DMSansSemiBold, key_selectWorkSpace, key_setLoginToken, key_setWorkspaceList } from '../../constant/Constant';
+import { DMSansBold, DMSansSemiBold, key_selectCollection, key_selectWorkSpace, key_setLoginToken, key_setWorkspaceList } from '../../constant/Constant';
 import { callGraphQL } from '../../aws/apollo/apolloAPIConnect';
 import { GET_LIST_MY_WORKSPACES } from '../../aws/apollo/queryMutation/apolloQuery';
 import HeaderComponent from '../../common/HeaderComponent';
@@ -29,6 +29,7 @@ const WorkSpaceScreen = () => {
     const [searchText, setSearchText] = useState("");
     const [selectedWorkSpace, setSelectedWorkSpace] = useState<any>({});
     const [workSpaceList, setWorkSpaceList] = useState([]);
+    const [allWorkspaces, setAllWorkspaces] = useState([]);
     const [timeoutToClear, setTimeoutToClear] = useState<any>();
     const colorPalette = [theme?.theme?.RED_COLOR,theme?.theme.BLUE_COLOR,
          theme?.theme.BLACK_COLOR, theme?.theme.YELLOW_COLOR, theme?.theme.GREEN_COLOR];
@@ -38,7 +39,7 @@ const WorkSpaceScreen = () => {
     useEffect(() => {
         (async () => {
           let selectWorkSpace:any = await getJSONData(key_selectWorkSpace); 
-          let selectWorkSpaceList:any = await getJSONData(key_setWorkspaceList);          
+          let selectWorkSpaceList:any = await getJSONData(key_setWorkspaceList);   
           await setSelectedWorkSpace(selectWorkSpace);
           const isOnline = await isNetAvailable();
           if(!isOnline){
@@ -60,8 +61,15 @@ const WorkSpaceScreen = () => {
         try {
             const loginToken:any = await getData(key_setLoginToken);
             const data = await callGraphQL(GET_LIST_MY_WORKSPACES, { limit: 100 }, loginToken,navigation);
-            await setWorkSpaceList(data?.listMyWorkspaces?.data);
-            await storeJSONData(key_setWorkspaceList,data?.listMyWorkspaces?.data)
+            
+// ✅ sort alphabetically by name (case-insensitive)
+const sortedWorkspaces:any = [...(data?.listMyWorkspaces?.data || [])].sort(
+  (a: any, b: any) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' })
+);
+
+await setWorkSpaceList(sortedWorkspaces);
+await setAllWorkspaces(sortedWorkspaces);
+            await storeJSONData(key_setWorkspaceList,sortedWorkspaces)
             setIsLoading(false);
         } catch (err) {
           setIsLoading(false);
@@ -71,9 +79,19 @@ const WorkSpaceScreen = () => {
         }
       };
 
-    const handlePress = (item:any) => {
-        setSelectedWorkSpace(item);
-    }
+      const handlePress = async (item: any) => {
+        try {
+          let selectCollection: any = await getJSONData(key_selectCollection);
+          if (selectCollection) {
+            setSelectedWorkSpace(item);
+            await storeJSONData(key_selectCollection, {});
+          } else {
+            setSelectedWorkSpace(item);
+          }
+        } catch (error) {
+          console.log("Error in handlePress:", error);
+        }
+      };
 
     const renderItem = ({ item, index }:any) => {
         const {name} = item;
@@ -92,7 +110,7 @@ const WorkSpaceScreen = () => {
              textAlign={'center'}
              styles={{ letterSpacing: 1.1 }}
             color={theme?.theme.WHITE_COLOR}
-            value={name?.charAt(0) + name?.charAt(1)} />
+            value={name?.charAt(0).toUpperCase() + name?.charAt(1).toUpperCase()} />
           </View>
           <Spacer width={10} />
           <View style={[styles.rowStyle,{flex:1}]}>
@@ -132,36 +150,36 @@ const WorkSpaceScreen = () => {
     const clearSearch = async () =>{
       setSearchText("");
       Keyboard.dismiss();
-      await fetchWorkspaces()
+      setWorkSpaceList(allWorkspaces);  // reset from master list
+      // await fetchWorkspaces()
       await setIsLoading(false);
     }
+
+    
     const handleSearch = async (text: string) => {
       setIsLoading(true)
-      if (text.length == 0) {
-        clearSearch()
-      }
-      else if (text.length >= 1) {
-        const filteredWorkspaces = workSpaceList.filter((item:any) =>
-          item.name.toLowerCase().includes(searchText.toLowerCase())
+      if (!text) {
+        await setWorkSpaceList(allWorkspaces);
+        await setIsLoading(false);
+        return;
+      }   
+        const filteredWorkspaces = allWorkspaces.filter((item: any) =>
+          item?.name?.toLowerCase().includes(text.toLowerCase())
         );
         await setWorkSpaceList(filteredWorkspaces)
         await setIsLoading(false)
-         
-      } else {
-        setSearchText(text);
-      }
   };
 
-    const debounce = (callback: any, alwaysCall: any, ms: any) => {
-      return (...args:any) => {
-          alwaysCall(...args);
-          clearTimeout(timeoutToClear);
-          setTimeoutToClear(
-              setTimeout(() => {
-                  callback(...args);
-              }, ms)
-          );
-      };
+  const debounce = (callback: any, alwaysCall: any, ms: any) => {
+    return (...args:any) => {
+        alwaysCall(...args);
+        clearTimeout(timeoutToClear);
+        setTimeoutToClear(
+            setTimeout(() => {
+                callback(...args);
+            }, ms)
+        );
+    };
   };
 
     const setSearchTextAlways = (text:any) => {
@@ -214,12 +232,24 @@ const WorkSpaceScreen = () => {
           paddingBottom: insets.bottom + 80, // leave space for footer
         }}
       >
+        {workSpaceList && workSpaceList.length > 0 ?
         <FlatList
             data={workSpaceList}
           showsVerticalScrollIndicator={false}
           renderItem={renderItem}
           keyExtractor={(item, index) => index.toString()}
           />
+          :
+          <View style={[styles.columnStyle,{flex:1}]}>
+          <TextComponent
+                                                  value={"No workspaces"}
+                                                  fontSize={19}
+                                                  fontFamily={DMSansBold}
+                                                  color={theme?.theme?.TEXT_COLOR}
+                                              // styles={styles.textViewStyle}
+                                              />
+                                              </View>
+        }
 <Spacer height={heightPercentageToDP(2)} />
 </KeyboardAwareScrollView>
 <View
@@ -249,7 +279,7 @@ const WorkSpaceScreen = () => {
             visible={modalVisible.value}
             headingType={modalVisible.title}
             text={modalVisible.key.toString()}
-            textFontSize={modalVisible.title == "" ? 20 : 12}
+            textFontSize={modalVisible.title == "" ? 20 : 14}
             textColor={theme?.theme?.BLACK_COLOR}
             onDismiss={() => setModalVisible({ title: "", key: "", value: false })}
             buttonHeight={50}

@@ -135,11 +135,11 @@ const AddNotesScreen = (props: any): JSX.Element => {
       userData.push(userDataOnSave);
       setIsLoading(false);
       await storeJSONData(key_setUserData, userData);
-      setModalVisible({ title: "Success", key: "Data Sent Successfully", value: true });
+      setModalVisible({ title: "Success", key: "Collection info has been shared with the client.", value: true });
       }else{
         setIsLoading(false);
         await storeJSONData(key_setUserData, [userDataOnSave]);
-        setModalVisible({ title: "Success", key: "Data Sent Successfully", value: true });
+        setModalVisible({ title: "Success", key: "Collection info has been shared with the client.", value: true });
       }
     }
 
@@ -180,7 +180,7 @@ const AddNotesScreen = (props: any): JSX.Element => {
           "workspaceName" :selectWorkSpace && selectWorkSpace?.name,
           "resend": false
             }, loginToken,navigation); 
-          setModalVisible({ title: "Success", key: "Data Sent Successfully", value: true });
+          setModalVisible({ title: "Success", key: "Collection info has been shared with the client.", value: true });
           
           // await setWorkSpaceList(data?.listMyWorkspaces?.data);
           // await storeJSONData(key_setWorkspaceList,data?.listMyWorkspaces?.data)
@@ -233,7 +233,9 @@ const AddNotesScreen = (props: any): JSX.Element => {
     if(modalVisible.title == 'Success'){
     setModalVisible({ title: "", key: "", value: false })
       navigateScreen(navigation,S_BottomTabsDashboard);
-    }
+    }else{
+      setModalVisible({ title: "", key: "", value: false })
+      }
   }
   let scrollRef: any;
   const setRef = (c: any) => {
@@ -668,7 +670,7 @@ const AddNotesScreen = (props: any): JSX.Element => {
             visible={modalVisible.value}
             headingType={modalVisible.title}
             text={modalVisible.key.toString()}
-            textFontSize={modalVisible.title == "" ? 20 : 12}
+            textFontSize={modalVisible.title == "" ? 20 : 14}
             textColor={theme?.theme?.BLACK_COLOR}
             onDismiss={() => setModalVisible({ title: "", key: "", value: false })}
             buttonHeight={50}

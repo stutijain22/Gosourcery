@@ -6,7 +6,7 @@ import { resizeMode } from "../utils/enums";
 import { imageTypes } from "../utils/enums";
 import { CROSS_ICON } from "../utils/sharedImages";
 import TextComponent from "./TextComponent";
-import { DMSansRegular, DMSansSemiBold } from "../constant/Constant";
+import { DMSansBold, DMSansRegular, DMSansSemiBold } from "../constant/Constant";
 import Spacer from "../styling/Spacer";
 import { deviceHeight, deviceWidth } from "../styling/mixin";
 import ButtonComponent from "./ButtonComponent";
@@ -17,8 +17,11 @@ interface CommonModalProps {
   headingText?: string;
   headingType?: string;
   text?: string;
+  text2?: string;
   textColor?: string;
   textFontFamily?: string;
+  text2FontSize?: Number;
+  textColor2?: string;
   crossIconColor?: string;
   headingTextFontSize?: Number;
   headingTextColor?: string;
@@ -86,20 +89,58 @@ const {crossIcon = false} = props;
                   value={props?.headingText}
                   fontSize={props?.headingTextFontSize}
                   fontFamily={DMSansSemiBold}
-                  color={props?.headingTextColor}
+                  color={"#34BF49"}
                   styles={{ textAlign: "center" }}
                 />}
           </View> :
           <View></View>}
         <Spacer height={10} />
 
-        <TextComponent
+
+        {/* <TextComponent
           value={props?.text}
           fontSize={props?.textFontSize}
-          fontFamily={props?.textFontFamily?props?.textFontFamily: DMSansRegular}
+          fontFamily={props?.textFontFamily?props?.textFontFamily: DMSansBold}
           color={props?.textColor}
           styles={{ textAlign: "center" }}
         />
+
+        <TextComponent
+          value={props?.text2}
+          fontSize={props?.text2FontSize}
+          fontFamily={props?.textFontFamily?props?.textFontFamily: DMSansBold}
+          color={props?.textColor2}
+          textDecorationLine="underline"
+          styles={{ textAlign: "center",textDecorationColor: props?.textColor2}}
+        /> */}
+        {props?.text2 ?
+  <Text style={{ textAlign: "center" }}>
+  <Text style={{
+      fontSize: props?.textFontSize,
+      fontFamily: props?.textFontFamily ? props?.textFontFamily : DMSansBold,
+      color: props?.textColor
+  }}>
+    {props?.text + " "}
+  </Text>
+  <Text style={{
+      fontSize: props?.text2FontSize,
+      fontFamily: props?.textFontFamily ? props?.textFontFamily : DMSansBold,
+      color: props?.textColor2,
+      textDecorationLine: "underline",
+      textDecorationColor: props?.textColor2
+  }}>
+    {props?.text2}
+  </Text>
+</Text>
+:
+<TextComponent
+          value={props?.text}
+          fontSize={props?.textFontSize}
+          fontFamily={props?.textFontFamily?props?.textFontFamily: DMSansBold}
+          color={props?.textColor}
+          styles={{ textAlign: "center" }}
+        />
+}
         <Spacer height={30} />
 
         {props?.singleButton ?

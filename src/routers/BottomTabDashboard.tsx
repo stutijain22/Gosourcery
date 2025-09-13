@@ -14,6 +14,7 @@ import HistoryScreen from '../screens/DashboardScreens/HistoryScreen/index';
 import DashboardScreen from '../screens/DashboardScreens/DashboardScreen';
 import MyAccountScreen from '../screens/DashboardScreens/MyAccountScreen';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { deviceWidth } from '../styling/mixin';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -23,34 +24,40 @@ interface TabIconsProps {
     title: string;
 }
 
-const TabIcons: FC<TabIconsProps> = (props) => {
-    const { focused, source, title } = props;
-    const { theme} = getEssentials();
-    return focused ?
-        <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 10,
-        width: 60, height:60,
-         }}>
-        <ImageComponent imageType={imageTypes.local} resizeMode={resizeMode.contain} 
-        tintColor={theme?.theme?.GREEN_COLOR} source={source}  height={20} width={20}/>
-            <Spacer height={5} />
-            <TextComponent value={title} fontSize={10} color={theme?.theme?.GREEN_COLOR} 
-            fontFamily={DMSansBold}/>
-        </View>
-        :
-        <View style={{ justifyContent: 'center', alignItems: 'center', 
-         marginTop:10, width:60, height:60
-         }}>
-            <ImageComponent imageType={imageTypes.local} 
-            resizeMode={resizeMode.contain} 
-            tintColor={theme?.theme?.BLACK_COLOR} 
-            source={source}  
-            height={20} width={20}/>
-            <Spacer height={5} />
-            <TextComponent value={title} fontSize={10} color={theme?.theme?.BLACK_COLOR} 
-            fontFamily={DMSansBold} styles={{ textAlign: 'center' }}/>
-        </View>
-
-};
+const TabIcons: FC<TabIconsProps> = ({ focused, source, title }) => {
+    const { theme } = getEssentials();
+  
+    return (
+      <View
+        style={{
+          justifyContent: "flex-end",
+          alignItems: "center",
+          width: deviceWidth/5,
+          height: 60,
+          marginTop:10,
+          paddingBottom: 4, // keeps it from floating on iOS
+        }}
+      >
+        <ImageComponent
+          imageType={imageTypes.local}
+          resizeMode={resizeMode.contain}
+          source={source}
+          tintColor={focused ? theme?.theme?.GREEN_COLOR : theme?.theme?.BLACK_COLOR}
+          height={20}
+          width={20}
+        />
+        <Spacer height={3} />
+        <TextComponent
+          value={title}
+          fontSize={11}
+          color={focused ? theme?.theme?.GREEN_COLOR : theme?.theme?.BLACK_COLOR}
+          fontFamily={DMSansBold}
+          styles={{ textAlign: "center" }}
+        />
+      </View>
+    );
+  };
+  
 
 export const BottomTabDashboard: FC = () => {
     const { theme } = getEssentials();
@@ -61,18 +68,17 @@ export const BottomTabDashboard: FC = () => {
         screenOptions={{
             tabBarShowLabel: false,
             tabBarStyle: {
-                height: 60 + insets.bottom,
-                paddingBottom: insets.bottom,
-                paddingTop: 10,
-            },
-            tabBarHideOnKeyboard:true,
-            tabBarActiveTintColor: theme?.theme?.WHITE_COLOR,
-            tabBarInactiveTintColor: theme?.theme?.DARK_GREY_COLOR,
-            tabBarBackground: () => (
-                <View style={{ flex: 1, backgroundColor: theme?.theme?.WHITE_COLOR }}>
-                </View>
-            ),
-        }}>
+                height: 70 + insets.bottom, // stable bar height
+                paddingBottom: insets.bottom > 0 ? insets.bottom : 10,
+                paddingTop: 5,
+                backgroundColor: theme?.theme?.WHITE_COLOR,
+                borderTopWidth: 0.5,
+                borderTopColor: "#ccc",
+              },
+            tabBarHideOnKeyboard: true,
+            tabBarActiveTintColor: theme?.theme?.GREEN_COLOR,
+            tabBarInactiveTintColor: theme?.theme?.BLACK_COLOR,
+          }}>
                  <BottomTab.Screen 
                     name={S_DashboardScreen} component={DashboardScreen}
                               options={{
