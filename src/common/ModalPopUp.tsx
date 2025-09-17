@@ -5,7 +5,6 @@ import {
   View,
   Dimensions,
   ViewStyle,
-  GestureResponderEvent,
 } from 'react-native';
 
 const { height: deviceHeight, width: deviceWidth } = Dimensions.get('window');

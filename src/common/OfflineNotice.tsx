@@ -21,8 +21,6 @@ const OfflineNotice = (props: any) => {
     const timeoutRef = useRef<any>(null);
     const [visible, setVisible] = useState(false);
     const [message, setMessage] = useState('');
-    const [ isConnected, setIsConnected ] = useState(true);
-    const [ isInternetReachable, setIsInternetReachable ] = useState(true);
 
     const handleConnectivityChange = (state: any) => {
         if (!state.isConnected) {
@@ -51,12 +49,6 @@ const OfflineNotice = (props: any) => {
           unsubscribe();
         };
       }, []);
-
-    // return !isConnected ? <MiniOfflineSign color={theme?.theme.RED_COLOR} 
-    // message={'Please check your network connection.'}/> 
-    // : !isInternetReachable ? 
-    // <MiniOfflineSign color={theme?.theme.RED_COLOR} 
-    // message={'Slow internet connection.'}/> : null;
     return visible ? <MiniOfflineSign color={theme?.theme.RED_COLOR} message={message} /> : null;
 
 
@@ -69,8 +61,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: width,
         paddingBottom: 15,
-        // position: 'absolute',
-        // top: 0, zIndex: 999
     },
     offlineText: { fontFamily: DMSansMedium, color: '#ffffff', fontSize: 14 }
 });

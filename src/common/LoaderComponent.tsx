@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import TextComponent from './TextComponent';
 import { ActivityIndicator, View } from 'react-native';
 import Spacer from '../styling/Spacer';

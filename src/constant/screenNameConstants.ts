@@ -1,7 +1,3 @@
-// authloading stack
-
-// export const S_AuthLoadingStack = "AuthLoadingStack";
-
 export const S_SplashScreen = "SplashScreen";
 export const S_LoginScreen = "LoginScreen";
 export const S_ForgotPasswordScreen = "ForgotPasswordScreen";

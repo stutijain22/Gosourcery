@@ -5,7 +5,6 @@
  * @getJsonData - to retrieve the json object or array from the local storage.
 * */
 
-import React from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const storeData = async (key: string, value: string) => {

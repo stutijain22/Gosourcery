@@ -1,4 +1,4 @@
-import { Alert, PermissionsAndroid, Platform } from "react-native";
+import { PermissionsAndroid, Platform } from "react-native";
 import DeviceInfo from "react-native-device-info";
 
 const requestCameraPermission = async () => {

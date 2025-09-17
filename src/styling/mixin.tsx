@@ -21,14 +21,3 @@ export const scaleSize = (size: number) => {
 };
 
 export const scaleFont = (size: number) => ( scaleHeight * size ) / bHeight;
-
-export function RFValue(size: number) {
-    const { height, width } = Dimensions.get("window");
-    const standardLength = width > height ? width : height;
-    const offset: any = width > height ? 0 : Platform.OS === "ios" ? 78 : StatusBar?.currentHeight; // iPhone X style SafeAreaView size in portrait
-
-    const deviceHeight = isIphoneX() || Platform.OS === "android" ? standardLength - offset : standardLength;
-
-    const heightPercent = (size * deviceHeight) / bHeight;
-    return Math.round(heightPercent);
-}

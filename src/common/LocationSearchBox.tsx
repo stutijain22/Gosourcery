@@ -41,7 +41,6 @@ interface TextInputComponentProps {
 const LocationSearchBox : FC<TextInputComponentProps> = (props) => {
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
-  const [focus, setFocus] = useState(false);
   const { theme } = getEssentials();
 
   const fetchAutocomplete = async (input: string) => {
@@ -105,7 +104,6 @@ const LocationSearchBox : FC<TextInputComponentProps> = (props) => {
           setQuery(text);
           fetchAutocomplete(text);
         }}
-        // multiline={true}
         style={[{
           borderRadius: 30,
           paddingHorizontal: 20,

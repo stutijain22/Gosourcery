@@ -1,14 +1,13 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Platform, View } from 'react-native';
+import { View } from 'react-native';
 import { getEssentials } from '../utils/utility';
-import { S_AddNotesScreen, S_DashboardScreen, S_HistoryScreen, S_MyAccountScreen, S_QRCodeScreen } from '../constant/screenNameConstants';
-import QRCodeScreen from '../screens/DashboardScreens/QRCodeScreen';
+import { S_DashboardScreen, S_HistoryScreen, S_MyAccountScreen } from '../constant/screenNameConstants';
 import { imageTypes, resizeMode } from '../utils/enums';
 import ImageComponent from '../common/ImageComponent';
 import Spacer from '../styling/Spacer';
 import TextComponent from '../common/TextComponent';
-import { DMSansBold, DMSansMedium } from '../constant/Constant';
+import { DMSansBold } from '../constant/Constant';
 import { BARCODE_SCANNER_ICON, HISTORY_ICON, USER_ICON } from '../utils/sharedImages';
 import HistoryScreen from '../screens/DashboardScreens/HistoryScreen/index';
 import DashboardScreen from '../screens/DashboardScreens/DashboardScreen';

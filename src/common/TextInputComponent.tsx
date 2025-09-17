@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Keyboard, TextInput, TextInputProps, View, Text, TouchableOpacity } from "react-native";
 import TextComponent from "./TextComponent";
 import Spacer from "../styling/Spacer";
@@ -16,7 +16,6 @@ interface TextInputComponentProps {
     fontFamily?: string,
     fontSize?: number,
     props?: TextInputProps & TextInputProps,
-    //onChangeText?: () => void;
     onChangeText?: any;
     onChange?: any;
 

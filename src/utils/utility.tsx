@@ -21,13 +21,6 @@ export const getEssentials = () => {
   return {navigation, theme}
 };
 
-export const parseData = (rawData: string) => {
-    const parts = rawData.split("^");
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const email = parts.find(part => emailRegex.test(part));
-    return email;
-}
-
 export const isNetAvailable = () => new Promise((resolve, reject) => {
     NetInfo.addEventListener(state => {
         const netInfo = state.isConnected;
@@ -62,29 +55,6 @@ export const emailValidation = (email: string) => {
     }
   };
   
-// export const getDeviceDetails = async () => {
-
-//     let deviceDetails: any = {
-//         deviceType: "app",
-//         deviceAppVersion: "1.0.0",
-//         deviceCountry: "In",
-//         deviceOs: Platform.OS,
-//         deviceToken:"",
-//         deviceUniqueId:""
-//         // deviceFcmToken: await getData(key_setFcmToken)
-//     };
-
-//     await DeviceInfo.getUniqueId().then((uniqueId) => {
-//         console.log(uniqueId);
-//         deviceDetails.deviceUniqueId = uniqueId;
-//     });
-//     await DeviceInfo.getDeviceToken().then((deviceToken) => {
-//         // iOS: "a2Jqsd0kanz..."
-//         deviceDetails.deviceToken = deviceToken;
-//       });
-//     return deviceDetails;
-// };
-
 export const navigateScreen = (navigation: any, screenName: string, params?: object) => {
     if (params) {
         return navigation.navigate(screenName, params);

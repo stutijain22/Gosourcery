@@ -1,5 +1,3 @@
-// export const BASE_URL = "https://nh22cuehqnd63bt7bgklbju5um.appsync-api.us-east-1.amazonaws.com/graphql";
-
 export const key_setLoginToken = "loginToken";
 export const key_setUserId = "userId";
 export const key_setUserScanData = "ScanData";

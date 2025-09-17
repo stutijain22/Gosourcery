@@ -1,311 +1,338 @@
-import React, { useEffect, useState } from 'react';
-import { MainContainer1, MainContainer2, shadowStyle } from "../../styling/shared";
-import { getData, getJSONData, storeJSONData } from '../../utils/AsyncStorage';
-import { DMSansBold, DMSansSemiBold, key_selectCollection, key_setCollectionList, key_setLoginToken } from '../../constant/Constant';
-import { callGraphQL } from '../../aws/apollo/apolloAPIConnect';
-import { GET_LIST_MY_COLLECTIONS, GET_LIST_MY_WORKSPACES } from '../../aws/apollo/queryMutation/apolloQuery';
+import React, {useEffect, useState} from 'react';
+import {MainContainer2, shadowStyle} from '../../styling/shared';
+import {getData, getJSONData, storeJSONData} from '../../utils/AsyncStorage';
+import {
+  DMSansBold,
+  DMSansSemiBold,
+  key_selectCollection,
+  key_setCollectionList,
+  key_setLoginToken,
+} from '../../constant/Constant';
+import {callGraphQL} from '../../aws/apollo/apolloAPIConnect';
+import {GET_LIST_MY_COLLECTIONS} from '../../aws/apollo/queryMutation/apolloQuery';
 import HeaderComponent from '../../common/HeaderComponent';
-import { getEssentials, goBack, isNetAvailable } from '../../utils/utility';
-import { FlatList, Keyboard, Platform, TouchableOpacity, View } from 'react-native';
+import {getEssentials, goBack, isNetAvailable} from '../../utils/utility';
+import {
+  FlatList,
+  Keyboard,
+  Platform,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import Spacer from '../../styling/Spacer';
 import styles from './styles';
 import TextComponent from '../../common/TextComponent';
-import { heightPercentageToDP } from '../../utils/responsiveUI';
+import {heightPercentageToDP} from '../../utils/responsiveUI';
 import LoaderComponent from '../../common/LoaderComponent';
-import { BACK_ARROW_ICON, TICK_ICON } from '../../utils/sharedImages';
+import {BACK_ARROW_ICON, TICK_ICON} from '../../utils/sharedImages';
 import ImageComponent from '../../common/ImageComponent';
-import { imageTypes, resizeMode } from '../../utils/enums';
+import {imageTypes, resizeMode} from '../../utils/enums';
 import ButtonComponent from '../../common/ButtonComponent';
-import { deviceWidth } from '../../styling/mixin';
+import {deviceWidth} from '../../styling/mixin';
 import moment from 'moment';
 import SearchInput from '../../common/SearchInput';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-const CollectionListScreen = (props:any) => {
-    const { navigation, theme } = getEssentials();
-    const [isLoading, setIsLoading] = useState(false);
-    const [searchText, setSearchText] = useState("");
-    const [timeoutToClear, setTimeoutToClear] = useState<any>();
-    const [selectedCollection, setSelectedCollection] = useState<any>({});
-    const [modalVisible, setModalVisible] = useState({ title: "", key: "", value: false });
-    const [collectionList, setCollectionList] = useState<any>([]);
-    const [allCollectionList, setAllCollectionList] = useState([]);
-    const { workspaceId } = props?.route?.params;
-    const colorPalette = [theme?.theme?.RED_COLOR,theme?.theme.BLUE_COLOR,
-      theme?.theme.BLACK_COLOR, theme?.theme.YELLOW_COLOR, theme?.theme.GREEN_COLOR];
-      const insets = useSafeAreaInsets();
+const CollectionListScreen = (props: any) => {
+  const {navigation, theme} = getEssentials();
+  const [isLoading, setIsLoading] = useState(false);
+  const [searchText, setSearchText] = useState('');
+  const [timeoutToClear, setTimeoutToClear] = useState<any>();
+  const [selectedCollection, setSelectedCollection] = useState<any>({});
+  const [modalVisible, setModalVisible] = useState({
+    title: '',
+    key: '',
+    value: false,
+  });
+  const [collectionList, setCollectionList] = useState<any>([]);
+  const [allCollectionList, setAllCollectionList] = useState([]);
+  const {workspaceId} = props?.route?.params;
+  const colorPalette = [
+    theme?.theme?.RED_COLOR,
+    theme?.theme.BLUE_COLOR,
+    theme?.theme.BLACK_COLOR,
+    theme?.theme.YELLOW_COLOR,
+    theme?.theme.GREEN_COLOR,
+  ];
+  const insets = useSafeAreaInsets();
 
-    useEffect(() => {
-        (async () => {
-          let selectCollection:any = await getJSONData(key_selectCollection);          
-          let selectCollectionList:any = await getJSONData(key_setCollectionList);          
-          await setSelectedCollection(selectCollection);
-          const isOnline = await isNetAvailable();
-          if(!isOnline){
-            await setCollectionList(selectCollectionList)
-          }
-          setIsLoading(true);
-          await fetchWorkspaces();
-        })()
-        return () => {};
-    }, []);
+  useEffect(() => {
+    (async () => {
+      let selectCollection: any = await getJSONData(key_selectCollection);
+      let selectCollectionList: any = await getJSONData(key_setCollectionList);
+      await setSelectedCollection(selectCollection);
+      const isOnline = await isNetAvailable();
+      if (!isOnline) {
+        await setCollectionList(selectCollectionList);
+      }
+      setIsLoading(true);
+      await fetchWorkspaces();
+    })();
+    return () => {};
+  }, []);
 
-    const fetchWorkspaces = async () => {
-        try {
-            const loginToken:any = await getData(key_setLoginToken);
-           // First call: collectionGroup "workspace"
-           
-    const res1 = await callGraphQL(GET_LIST_MY_COLLECTIONS, {
-      limit: 100,
-      workspaceId: workspaceId?.id,
-      collectionGroup: "workspace",
-    }, loginToken, navigation);
+  const fetchWorkspaces = async () => {
+    try {
+      const loginToken: any = await getData(key_setLoginToken);
+      // First call: collectionGroup "workspace"
 
-    // Second call: collectionGroup "published"
-    const res2 = await callGraphQL(GET_LIST_MY_COLLECTIONS, {
-      limit: 100,
-      workspaceId: workspaceId?.id,
-      collectionGroup: "published",
-    }, loginToken, navigation);
+      const res1 = await callGraphQL(
+        GET_LIST_MY_COLLECTIONS,
+        {
+          limit: 100,
+          workspaceId: workspaceId?.id,
+          collectionGroup: 'workspace',
+        },
+        loginToken,
+        navigation,
+      );
 
-    const workspaceCollections = res1?.listMyCollections?.data || [];
-    const publishedCollections = res2?.listMyCollections?.data || [];
+      // Second call: collectionGroup "published"
+      const res2 = await callGraphQL(
+        GET_LIST_MY_COLLECTIONS,
+        {
+          limit: 100,
+          workspaceId: workspaceId?.id,
+          collectionGroup: 'published',
+        },
+        loginToken,
+        navigation,
+      );
 
-    const mergedCollections:any = [...workspaceCollections, ...publishedCollections];     
-  // ✅ Sort alphabetically by `name` (case-insensitive)
-const sortedCollections:any = [...mergedCollections].sort(
-  (a: any, b: any) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' })
-);
+      const workspaceCollections = res1?.listMyCollections?.data || [];
+      const publishedCollections = res2?.listMyCollections?.data || [];
 
-await setCollectionList(sortedCollections);
-await setAllCollectionList(sortedCollections);
-await storeJSONData(key_setCollectionList, sortedCollections);
-            setIsLoading(false);
-        } catch (err) {
-          setIsLoading(false);
-          console.error("❌ Failed to fetch workspaces:", err);
-        } finally {
-          setIsLoading(false);
-        }
-      };
-      
-    const handlePress = (item:any) => {
-        setSelectedCollection(item);
+      const mergedCollections: any = [
+        ...workspaceCollections,
+        ...publishedCollections,
+      ];
+      // Sort alphabetically by `name` (case-insensitive)
+      const sortedCollections: any = [...mergedCollections].sort(
+        (a: any, b: any) =>
+          a.name.localeCompare(b.name, 'en', {sensitivity: 'base'}),
+      );
+
+      await setCollectionList(sortedCollections);
+      await setAllCollectionList(sortedCollections);
+      await storeJSONData(key_setCollectionList, sortedCollections);
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
+      console.error('❌ Failed to fetch workspaces:', err);
+    } finally {
+      setIsLoading(false);
     }
+  };
 
-    const renderItem = ({ item, index }:any) => {
-        const {name,createdDate,pictures, creator, lastModified} = item;
-        const avatarBgColor = colorPalette[index % colorPalette.length];
-        
-        return( 
-        <TouchableOpacity style={[shadowStyle, selectedCollection?.id === item?.id ? styles.containerStyleSelected
-          :styles.containerStyle]}
+  const handlePress = (item: any) => {
+    setSelectedCollection(item);
+  };
+
+  const renderItem = ({item, index}: any) => {
+    const {name, lastModified} = item;
+    const avatarBgColor = colorPalette[index % colorPalette.length];
+
+    return (
+      <TouchableOpacity
+        style={[
+          shadowStyle,
+          selectedCollection?.id === item?.id
+            ? styles.containerStyleSelected
+            : styles.containerStyle,
+        ]}
         activeOpacity={0.8}
         onPress={() => handlePress(item)}>
-          {/* <Spacer width={10} /> */}
-          <View style={[styles.imageViewStyle,{
-            backgroundColor: avatarBgColor,
-          }]}>
+        <View
+          style={[
+            styles.imageViewStyle,
+            {
+              backgroundColor: avatarBgColor,
+            },
+          ]}>
           <TextComponent
-          fontSize={11} 
-             fontFamily={DMSansBold} 
-             textAlign={'center'}
-             styles={{ letterSpacing: 1.1 }}
+            fontSize={11}
+            fontFamily={DMSansBold}
+            textAlign={'center'}
+            styles={{letterSpacing: 1.1}}
             color={theme?.theme.WHITE_COLOR}
-            value={name?.charAt(0).toUpperCase() + name?.charAt(1).toUpperCase()} />
-          </View>
-          <Spacer width={10} />
-          <View style={{paddingHorizontal:5, flex:1}}>
-          <TextComponent
-          fontSize={14} 
-             fontFamily={DMSansBold} 
-            //  textAlign={'center'}
-             styles={{ letterSpacing: 1.1,flex:1 }}
-            color={theme?.theme.BLACK_COLOR}
-            value={name} />
-
-        <TextComponent
-          fontSize={10} 
-             fontFamily={DMSansBold} 
-             styles={{ letterSpacing: 1.1,flex:1 }}
-            color={theme?.theme.FORTH_TEXT_COLOR}
-            value={'LAST MODIFIED: ' + moment(Number(lastModified)).format('DD MMM, YYYY')} />
-         
-          </View>
-          {selectedCollection?.id === item?.id && (
-              <ImageComponent
-              source={TICK_ICON}
-              width={20}
-              height={20}
-              imageType={imageTypes.local}
-              resizeMode={resizeMode.contain}
-            />
-            )}
-        </TouchableOpacity>
-        )
-      };
-
-    const nextClick = async () => {
-      if(!selectedCollection?.id){
-        setModalVisible({ title: "Select Type", key: "Please select a collection", value: true });
-      }else{
-        await storeJSONData(key_selectCollection,selectedCollection); 
-        goBack(navigation)
-      }
-    }
-
-    const clearSearch = async () =>{
-      setSearchText("");
-      Keyboard.dismiss();
-      setCollectionList(allCollectionList);
-      // await fetchWorkspaces()
-      await setIsLoading(false);
-    }
-
-    const handleSearch = async (text: string) => {
-      setIsLoading(true)
-      if (!text) {
-        await setCollectionList(allCollectionList);
-        await setIsLoading(false);
-        return;
-      }  
-        const filteredWorkspaces = allCollectionList.filter((item: any) =>
-          item?.name?.toLowerCase().includes(text.toLowerCase())
-        );
-        await setCollectionList(filteredWorkspaces)
-        await setIsLoading(false)
-  };
-
-  //   const handleSearch = async (text: string) => {
-  //     setIsLoading(true)
-  //     if (text.length == 0) {
-  //       clearSearch()
-  //     }
-  //     else if (text.length >= 1) {
-  //       const filteredWorkspaces = collectionList.filter((item:any) =>
-  //         item.name.toLowerCase().includes(searchText.toLowerCase())
-  //       );
-  //       await setCollectionList(filteredWorkspaces)
-  //       await setIsLoading(false)
-         
-  //     } else {
-  //       setSearchText(text);
-  //     }
-  // };
-
-    const debounce = (callback: any, alwaysCall: any, ms: any) => {
-      return (...args:any) => {
-          alwaysCall(...args);
-          clearTimeout(timeoutToClear);
-          setTimeoutToClear(
-              setTimeout(() => {
-                  callback(...args);
-              }, ms)
-          );
-      };
-  };
-
-    const setSearchTextAlways = (text:any) => {
-      setSearchText(text);
-  };
-
-  const debouncedSearch = debounce(
-      handleSearch,
-      setSearchTextAlways,
-      500
-  );
-
-    return(
-        <MainContainer2>
-           <LoaderComponent
-            isLoading={isLoading}
-            loadingMessage={'Loading ... '}
-        />
-   <HeaderComponent
-          isLeftAvailable={true}
-          leftIcon={BACK_ARROW_ICON}
-          leftIconStyle={{width:20,height:20,tintColor:theme?.theme.BLACK_COLOR}}
-          onLeftPress={() => goBack(navigation)}
-          height={50}
-          middleText={'Collection Lists'}
-          fontSize={18}
-          fontColor={theme?.theme?.BLACK_COLOR}
-          mainContainer={{backgroundColor:theme?.theme.WHITE_COLOR}}
-          isMiddleAvailable={true}
+            value={
+              name?.charAt(0).toUpperCase() + name?.charAt(1).toUpperCase()
+            }
           />
-<Spacer height={heightPercentageToDP(3)} />
-<SearchInput
+        </View>
+        <Spacer width={10} />
+        <View style={{paddingHorizontal: 5, flex: 1}}>
+          <TextComponent
+            fontSize={14}
+            fontFamily={DMSansBold}
+            styles={{letterSpacing: 1.1, flex: 1}}
+            color={theme?.theme.BLACK_COLOR}
+            value={name}
+          />
+
+          <TextComponent
+            fontSize={10}
+            fontFamily={DMSansBold}
+            styles={{letterSpacing: 1.1, flex: 1}}
+            color={theme?.theme.FORTH_TEXT_COLOR}
+            value={
+              'LAST MODIFIED: ' +
+              moment(Number(lastModified)).format('DD MMM, YYYY')
+            }
+          />
+        </View>
+        {selectedCollection?.id === item?.id && (
+          <ImageComponent
+            source={TICK_ICON}
+            width={20}
+            height={20}
+            imageType={imageTypes.local}
+            resizeMode={resizeMode.contain}
+          />
+        )}
+      </TouchableOpacity>
+    );
+  };
+
+  const nextClick = async () => {
+    if (!selectedCollection?.id) {
+      setModalVisible({
+        title: 'Select Type',
+        key: 'Please select a collection',
+        value: true,
+      });
+    } else {
+      await storeJSONData(key_selectCollection, selectedCollection);
+      goBack(navigation);
+    }
+  };
+
+  const clearSearch = async () => {
+    setSearchText('');
+    Keyboard.dismiss();
+    setCollectionList(allCollectionList);
+    await setIsLoading(false);
+  };
+
+  const handleSearch = async (text: string) => {
+    setIsLoading(true);
+    if (!text) {
+      await setCollectionList(allCollectionList);
+      await setIsLoading(false);
+      return;
+    }
+    const filteredWorkspaces = allCollectionList.filter((item: any) =>
+      item?.name?.toLowerCase().includes(text.toLowerCase()),
+    );
+    await setCollectionList(filteredWorkspaces);
+    await setIsLoading(false);
+  };
+
+  const debounce = (callback: any, alwaysCall: any, ms: any) => {
+    return (...args: any) => {
+      alwaysCall(...args);
+      clearTimeout(timeoutToClear);
+      setTimeoutToClear(
+        setTimeout(() => {
+          callback(...args);
+        }, ms),
+      );
+    };
+  };
+
+  const setSearchTextAlways = (text: any) => {
+    setSearchText(text);
+  };
+
+  const debouncedSearch = debounce(handleSearch, setSearchTextAlways, 500);
+
+  return (
+    <MainContainer2>
+      <LoaderComponent isLoading={isLoading} loadingMessage={'Loading ... '} />
+      <HeaderComponent
+        isLeftAvailable={true}
+        leftIcon={BACK_ARROW_ICON}
+        leftIconStyle={{
+          width: 20,
+          height: 20,
+          tintColor: theme?.theme.BLACK_COLOR,
+        }}
+        onLeftPress={() => goBack(navigation)}
+        height={50}
+        middleText={'Collection Lists'}
+        fontSize={18}
+        fontColor={theme?.theme?.BLACK_COLOR}
+        mainContainer={{backgroundColor: theme?.theme.WHITE_COLOR}}
+        isMiddleAvailable={true}
+      />
+      <Spacer height={heightPercentageToDP(3)} />
+      <SearchInput
         clearSearch={() => clearSearch()}
         search={searchText}
-        searchPlaceholder={"Collections"}
+        searchPlaceholder={'Collections'}
         placeholderTextColor={theme?.theme?.DARK_GREY_COLOR}
-        handleSearch={debouncedSearch} 
-        />
+        handleSearch={debouncedSearch}
+      />
 
-  <Spacer height={heightPercentageToDP(3)} />
+      <Spacer height={heightPercentageToDP(3)} />
 
-         <KeyboardAwareScrollView
+      <KeyboardAwareScrollView
         showsVerticalScrollIndicator={false}
         enableOnAndroid={true}
-        extraScrollHeight={Platform.OS === "android" ? 100 : 20} // push content up
+        extraScrollHeight={Platform.OS === 'android' ? 100 : 20} // push content up
         keyboardOpeningTime={0}
         enableAutomaticScroll={true} // ✅ allow automatic scroll
         contentContainerStyle={{
           flexGrow: 1,
           paddingBottom: insets.bottom + 80, // leave space for footer
-        }}
-      >
+        }}>
+        {collectionList && collectionList.length > 0 ? (
+          <FlatList
+            data={collectionList}
+            showsVerticalScrollIndicator={false}
+            renderItem={renderItem}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        ) : (
+          <View style={[styles.columnStyle, {flex: 1}]}>
+            <TextComponent
+              value={'No collections'}
+              fontSize={19}
+              fontFamily={DMSansBold}
+              color={theme?.theme?.TEXT_COLOR}
+            />
+          </View>
+        )}
+      </KeyboardAwareScrollView>
 
-{collectionList && collectionList.length > 0 ?
-    <FlatList
-    data={collectionList}
-  showsVerticalScrollIndicator={false}
-  renderItem={renderItem}
-  keyExtractor={(item, index) => index.toString()}
-  />
-:
-<View style={[styles.columnStyle,{flex:1}]}>
-<TextComponent
-                                        value={"No collections"}
-                                        fontSize={19}
-                                        fontFamily={DMSansBold}
-                                        color={theme?.theme?.TEXT_COLOR}
-                                    // styles={styles.textViewStyle}
-                                    />
-</View>
-}
-        
-{/* <Spacer height={heightPercentageToDP(2)} /> */}
-</KeyboardAwareScrollView>
-
-<View
+      <View
         style={{
           position: 'absolute',
           bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: theme?.theme?.WHITE_COLOR, // full-width footer background
-    paddingBottom: insets.bottom + 10, // safe area for iOS/Android
-    paddingTop: 10,
-    alignItems: 'center',
-        }}
-      >
-<ButtonComponent
-        title={'NEXT'}
-        onHandleClick={() => nextClick()}
-        height={50}
-        btnBackgroundColor={theme?.theme.BLUE_COLOR}
-        width={deviceWidth/ 2}
-        fontColor={theme?.theme.WHITE_COLOR}
-        textStyle={{ fontSize: 16, fontFamily: DMSansSemiBold, letterSpacing: 1.1 }}
+          left: 0,
+          right: 0,
+          backgroundColor: theme?.theme?.WHITE_COLOR, // full-width footer background
+          paddingBottom: insets.bottom + 10, // safe area for iOS/Android
+          paddingTop: 10,
+          alignItems: 'center',
+        }}>
+        <ButtonComponent
+          title={'NEXT'}
+          onHandleClick={() => nextClick()}
+          height={50}
+          btnBackgroundColor={theme?.theme.BLUE_COLOR}
+          width={deviceWidth / 2}
+          fontColor={theme?.theme.WHITE_COLOR}
+          textStyle={{
+            fontSize: 16,
+            fontFamily: DMSansSemiBold,
+            letterSpacing: 1.1,
+          }}
         />
-        </View>
-{/* <Spacer height={heightPercentageToDP(7)} /> */}
-
-
-        </MainContainer2>
-    )
+      </View>
+    </MainContainer2>
+  );
 };
 
 export default CollectionListScreen;

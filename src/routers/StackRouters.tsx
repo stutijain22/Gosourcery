@@ -3,14 +3,13 @@ import {
   createStackNavigator,
 } from "@react-navigation/stack";
 import SplashScreen from "../screens/AuthenticationScreens/SplashScreen";
-import { S_AddNotesScreen, S_BottomTabsDashboard, S_CollectionListScreen, S_DashboardScreen, S_ForgotPasswordScreen, S_HistoryDetailScreen, S_LoginScreen, S_QRCodeScreen, S_SplashScreen, S_WorkSpaceScreen } from "../constant/screenNameConstants";
+import { S_AddNotesScreen, S_BottomTabsDashboard, S_CollectionListScreen, S_ForgotPasswordScreen, S_HistoryDetailScreen, S_LoginScreen, S_QRCodeScreen, S_SplashScreen, S_WorkSpaceScreen } from "../constant/screenNameConstants";
 import LoginScreen from "../screens/AuthenticationScreens/LoginScreen";
 import ForgotPasswordScreen from "../screens/AuthenticationScreens/ForgotPasswordScreen";
 import { BottomTabDashboard } from "./BottomTabDashboard";
 import AddNotesScreen from "../screens/DashboardScreens/AddNotesScreen";
 import WorkSpaceScreen from "../screens/DashboardScreens/WorkSpaceScreen";
 import CollectionListScreen from "../screens/DashboardScreens/CollectionListScreen";
-import DashboardScreen from "../screens/DashboardScreens/DashboardScreen";
 import QRCodeScreen from "../screens/DashboardScreens/QRCodeScreen";
 import HistoryDetailScreen from "../screens/DashboardScreens/HistoryScreen/HistoryDetailScreen";
 

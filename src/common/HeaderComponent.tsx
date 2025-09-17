@@ -3,8 +3,7 @@ import { setThemeJSON } from "../utils/context";
 import { DMSansBold, DMSansRegular } from "../constant/Constant";
 import { Image, StatusBar, TextProps, TouchableOpacity, View } from "react-native";
 import { deviceWidth } from "../styling/mixin";
-import { hasDynamicIsland, isTablet } from "react-native-device-info";
-import ImageComponent from "./ImageComponent";
+import { isTablet } from "react-native-device-info";
 import TextComponent from "./TextComponent";
 import OfflineNotice from "./OfflineNotice";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -64,7 +63,6 @@ const HeaderComponent: FC<HeaderProps> = (props) => {
   const insets = useSafeAreaInsets(); // gives top, bottom, left, right padding
   const baseHeight = 50;
   const {
-    height,
     leftIcon,
     leftIconStyle = { height: 25, width: 25, },
     leftStyle = { height: 35, width: 35, marginLeft: 10 },
@@ -92,8 +90,6 @@ const HeaderComponent: FC<HeaderProps> = (props) => {
     fontFamily = DMSansBold,
     hasSubText = false,
     middleSubTextWithIcon,
-    headerGradientHeight = 45,
-    numberOfLines,
   } = props;
 
   return (
@@ -106,7 +102,6 @@ const HeaderComponent: FC<HeaderProps> = (props) => {
           backgroundColor: "transparent",
           width: deviceWidth,
           height: baseHeight + insets.top,
-          // height: hasDynamicIsland() ? height + 42 : height +35,
           justifyContent: "flex-end",
           alignItems: "flex-end",
           alignSelf:'center',

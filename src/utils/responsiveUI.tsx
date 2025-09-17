@@ -37,36 +37,7 @@ const heightPercentageToDP = (heightPercent: number) => {
     return PixelRatio.roundToNearestPixel(screenHeight * elemHeight / 100);
 };
 
-
-const RFPercentage = (percent: any) => {
-    const { height, width } = Dimensions.get("window");
-    const standardLength = width > height ? width : height;
-    const offset = width > height ? 0 : Platform.OS === "ios" ? 78 : StatusBar.currentHeight; // iPhone X style SafeAreaView size in portrait
-
-    const deviceHeight = offset && (isIphoneX() || Platform.OS === "android" ? standardLength - offset : standardLength);
-
-    const heightPercent = deviceHeight && ( (percent * deviceHeight) / 100 );
-    return heightPercent && Math.round(heightPercent);
-};
-
-// guideline height for standard 5" device screen is 680
-const RFValue = (fontSize: any, standardScreenHeight: number = 680) => {
-
-    const { height, width } = Dimensions.get("window");
-    const standardLength = width > height ? width : height;
-    const offset =
-        width > height ? 0 : Platform.OS === "ios" ? 78 : StatusBar.currentHeight; // iPhone X style SafeAreaView size in portrait
-
-    const deviceHeight = offset && (isIphoneX() || Platform.OS === "android" ? standardLength - offset : standardLength);
-
-    const heightPercent = deviceHeight && ( (fontSize * deviceHeight) / standardScreenHeight );
-    return heightPercent && Math.round(heightPercent);
-};
-
-
 export {
     widthPercentageToDP,
     heightPercentageToDP,
-    RFPercentage,
-    RFValue
 };

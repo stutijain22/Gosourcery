@@ -18,10 +18,6 @@ export enum imageTypes {
     'local', 'uri'
 }
 
-export enum PolicyType {
-    CONSUMER = 'CONSUMER', BUSINESS = 'BUSINESS'
-}
-
 export enum dateFormat {
     DDMMYYYY_WITH_FORESLASH = "DD/MM/YYYY",
     MMDDYYYY_WITH_FORESLASH = "MM/DD/YYYY",

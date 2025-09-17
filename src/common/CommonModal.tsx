@@ -1,6 +1,5 @@
 import { FC } from "react";
-import { GestureResponderEvent, TouchableOpacity, StyleSheet, View, ViewStyle, TouchableWithoutFeedback, Modal, Text, Image } from "react-native";
-import { getEssentials } from "../utils/utility";
+import { GestureResponderEvent, TouchableOpacity, StyleSheet, View, ViewStyle, Modal, Text, Image } from "react-native";
 import ImageComponent from "./ImageComponent";
 import { resizeMode } from "../utils/enums";
 import { imageTypes } from "../utils/enums";
@@ -47,8 +46,6 @@ const {crossIcon = false} = props;
 
   return (
     <Modal
-    // animated
-    // animationType="fade"
     visible={props?.visible}
     transparent
     onRequestClose={() => _handleDismiss()}
@@ -96,23 +93,6 @@ const {crossIcon = false} = props;
           <View></View>}
         <Spacer height={10} />
 
-
-        {/* <TextComponent
-          value={props?.text}
-          fontSize={props?.textFontSize}
-          fontFamily={props?.textFontFamily?props?.textFontFamily: DMSansBold}
-          color={props?.textColor}
-          styles={{ textAlign: "center" }}
-        />
-
-        <TextComponent
-          value={props?.text2}
-          fontSize={props?.text2FontSize}
-          fontFamily={props?.textFontFamily?props?.textFontFamily: DMSansBold}
-          color={props?.textColor2}
-          textDecorationLine="underline"
-          styles={{ textAlign: "center",textDecorationColor: props?.textColor2}}
-        /> */}
         {props?.text2 ?
   <Text style={{ textAlign: "center" }}>
   <Text style={{
