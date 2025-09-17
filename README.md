@@ -6,11 +6,11 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 
 ## Step 1: Open Terminal
 
-> > Open terminal and move to a folder where you want to keep your project
+> Open terminal and move to a folder where you want to keep your project
 
 ## Step 2 : Clone the From Git
 
-> > Clone the latest project from git by using this below command in the terminal
+> Clone the latest project from git by using this below command in the terminal
 
 # Using
 
@@ -18,7 +18,7 @@ git clone https://github.com/stutijain22/Gosourcery.git
 
 ## Step 3:\*\* Open Project Terminal >
 
-> > > > Once the project successfully cloned, To install node_modules run following command in the terminal with the same directory.
+> Once the project successfully cloned, To install node_modules run following command in the terminal with the same directory.
 
 # Using
 
@@ -28,7 +28,7 @@ yarn install
 
 ## Step 4:\*\* After Yarn Install >
 
-> > You need to install the pod for ios. Follow below command to install pod in the ios project.
+> You need to install the pod for ios. Follow below command to install pod in the ios project.
 
 # Using
 
@@ -44,7 +44,7 @@ For more information, please visit [CocoaPods Getting Started guide](https://gui
 
 ## Step 5: Start Metro
 
-> > You will need to run **Metro**, the JavaScript build tool for React Native.
+> You will need to run **Metro**, the JavaScript build tool for React Native.
 
 To start the Metro dev server, run the following command from the root of your React Native project:
 
@@ -98,14 +98,14 @@ Open `App.tsx` in your text editor of choice and make some changes. When you sav
 
 ## Create Android APK and App Bundle same steps
 
-> > Set this on the android studio
-> > Click Build >> Generate Signed App Bundle/ APK >> Select APK >> Click Next
-> > APP_UPLOAD_STORE_FILE=gosourcery.keystore
-> > APP_UPLOAD_KEY_ALIAS=gosourcery
-> > APP_UPLOAD_STORE_PASSWORD=android
-> > APP_UPLOAD_KEY_PASSWORD=android
+> Set this on the android studio
+> Click Build >> Generate Signed App Bundle/ APK >> Select APK >> Click Next
+> APP_UPLOAD_STORE_FILE=gosourcery.keystore
+> APP_UPLOAD_KEY_ALIAS=gosourcery
+> APP_UPLOAD_STORE_PASSWORD=android
+> APP_UPLOAD_KEY_PASSWORD=android
 
-> > For Create APK
+> For Create APK
 
 ## Using This command (Run in the project terminal)
 
@@ -115,7 +115,7 @@ cd android && ./gradlew clean && ./gradlew :app:assembleRelease && cd ..
 
 android/app/build/outputs/apk/release/app-release.aab
 
-> > For Create APP Bundle
+> For Create APP Bundle
 
 ## Using Android Studio
 
@@ -127,7 +127,7 @@ android/app/release/app-release.aab
 
 ### IOS
 
-> > Open the Project in Xcode
+> Open the Project in Xcode
 
 ## Using (Run in the project terminal)
 
@@ -136,16 +136,16 @@ open Gosourcery.xcworkspace
 
 ## Step 1:
 
-> > In Xcode, Select the Product Option >> Select Archive
+> In Xcode, Select the Product Option >> Select Archive
 
 ## Step 2: After archiving:
 
-> > Automatically Open Organizer window.
-> > Choose:
+> Automatically Open Organizer window.
+> Choose:
 
 1. Distribute App → App Store Connect → Upload directly.
 2. Distribute App → Select Test Flight → Upload directly.(If you need to upload for a test purpose)
-   > > Go to Apple account >> Click Our App >> Select Test Flight >> Show a Manage option on the Latest uploaded build >> Click Manage >> Selecte last Option None of the algorithms mentioned above
+   > Go to Apple account >> Click Our App >> Select Test Flight >> Show a Manage option on the Latest uploaded build >> Click Manage >> Selecte last Option None of the algorithms mentioned above
 
 ## Congratulations! :tada:
 
